@@ -1,3 +1,13 @@
+/*
+ * Decompiled with CFR 0.148.
+ *
+ * Could not load the following classes:
+ *  net.minecraft.client.renderer.texture.TextureUtil
+ *  org.apache.commons.io.IOUtils
+ *  org.apache.logging.log4j.Level
+ *  org.apache.logging.log4j.Logger
+ *  org.lwjgl.opengl.GL11
+ */
 package lumien.custommainmenu.lib.textures;
 
 import java.awt.image.BufferedImage;
@@ -5,73 +15,89 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import javax.imageio.ImageIO;
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.handler.LoadTextureURL;
-import lumien.custommainmenu.lib.StringReplacer;
-
+import lumien.custommainmenu.util.GlStateManager;
+import net.minecraft.client.renderer.texture.TextureUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.texture.TextureUtil;
+public class TextureURL implements ITexture {
+    URL url;
+    int textureID = -1;
+    private BufferedImage bi;
 
-public class TextureURL implements ITexture
-{
-	URL url;
-	int textureID;
-	private BufferedImage bi;
+    public TextureURL(String url) {
+        try {
+            this.url = new URL(url);
+        } catch (MalformedURLException e) {
+            CustomMainMenu.INSTANCE.logger.log(Level.ERROR, "Invalid URL: " + url);
+            e.printStackTrace();
+        }
+        new LoadTextureURL(this).start();
+    }
 
-	public TextureURL(String url)
-	{
-		this.textureID = -1;
-		try
-		{
-			this.url = new URL(StringReplacer.replacePlaceholders(url));
-		}
-		catch (MalformedURLException e)
-		{
-			CustomMainMenu.INSTANCE.logger.log(Level.ERROR, "Invalid URL: " + url);
-			e.printStackTrace();
-		}
+    public void load() {
+        InputStream inputStream = null;
+        try {
+            inputStream = this.url.openStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedImage bi = null;
+        if (inputStream != null) {
+            try {
+                bi = TextureURL.readBufferedImage(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            IOUtils.closeQuietly((InputStream) inputStream);
+        }
+        if (bi != null) {
+            this.textureID = TextureUtil.uploadTextureImageAllocate(
+                    (int) GL11.glGenTextures(), (BufferedImage) bi, (boolean) false, (boolean) false);
+        }
+    }
 
-		new LoadTextureURL(this).start();
-	}
+    @Override
+    public void bind() {
+        if (this.textureID != -1) {
+            GlStateManager.bindTexture(this.textureID);
+        } else {
+            if (this.bi != null) {
+                this.setTextureID(TextureUtil.uploadTextureImageAllocate(
+                        (int) GL11.glGenTextures(), (BufferedImage) this.bi, (boolean) false, (boolean) false));
+                this.bind();
+                return;
+            }
+            CustomMainMenu.bindTransparent();
+        }
+    }
 
-	@Override
-	public void bind()
-	{
-		if (this.textureID != -1)
-		{
-			GlStateManager.bindTexture(this.textureID);
-		}
-		else
-		{
-			if (bi != null)
-			{
-				setTextureID(TextureUtil.uploadTextureImageAllocate(GL11.glGenTextures(), bi, false, false));
-				bind();
-				return;
-			}
-			CustomMainMenu.bindTransparent();
-		}
-	}
+    public void finishLoading(BufferedImage bi) {
+        this.bi = bi;
+    }
 
-	public void finishLoading(BufferedImage bi)
-	{
-		this.bi = bi;
-	}
+    public URL getURL() {
+        return this.url;
+    }
 
-	public URL getURL()
-	{
-		return url;
-	}
+    public void setTextureID(int textureID) {
+        this.textureID = textureID;
+    }
 
-	public void setTextureID(int textureID)
-	{
-		this.textureID = textureID;
-	}
-
+    /*
+     * WARNING - Removed try catching itself - possible behaviour change.
+     */
+    public static BufferedImage readBufferedImage(InputStream imageStream) throws IOException {
+        BufferedImage bufferedimage;
+        try {
+            bufferedimage = ImageIO.read(imageStream);
+        } finally {
+            IOUtils.closeQuietly((InputStream) imageStream);
+        }
+        return bufferedimage;
+    }
 }

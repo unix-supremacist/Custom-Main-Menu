@@ -1,3 +1,4 @@
+[
 {
 	"modListVersion": 2,
 	"modList": [{
@@ -17,5 +18,5 @@
 		"dependencies": [],
 		"dependants": [],
 		"useDependencyInformation": true
-	}]
-}
+	}
+]

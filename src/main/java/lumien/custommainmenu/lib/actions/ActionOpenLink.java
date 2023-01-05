@@ -1,28 +1,32 @@
+/*
+ * Decompiled with CFR 0.148.
+ *
+ * Could not load the following classes:
+ *  net.minecraft.client.Minecraft
+ *  net.minecraft.client.gui.GuiScreen
+ *  net.minecraft.client.gui.GuiYesNoCallback
+ */
 package lumien.custommainmenu.lib.actions;
 
 import lumien.custommainmenu.gui.GuiCustom;
 import lumien.custommainmenu.gui.GuiCustomConfirmOpenLink;
-import lumien.custommainmenu.lib.StringReplacer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
 
-public class ActionOpenLink implements IAction
-{
-	String link;
-	
-	public ActionOpenLink(String link)
-	{
-		this.link = link;
-	}
+public class ActionOpenLink implements IAction {
+    String link;
 
-	@Override
-	public void perform(Object source,GuiCustom menu)
-	{
-		Minecraft.getMinecraft().displayGuiScreen(new GuiCustomConfirmOpenLink(menu, getLink(), -1, false));
-		menu.beingChecked = source;
-	}
+    public ActionOpenLink(String link) {
+        this.link = link;
+    }
 
-	public String getLink()
-	{
-		return StringReplacer.replacePlaceholders(link);
-	}
+    @Override
+    public void perform(Object source, GuiCustom menu) {
+        Minecraft.getMinecraft().displayGuiScreen((GuiScreen) new GuiCustomConfirmOpenLink(menu, this.link, -1, false));
+        menu.beingChecked = source;
+    }
+
+    public String getLink() {
+        return this.link;
+    }
 }
