@@ -30,6 +30,7 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiCustomLabel extends Gui {
@@ -48,6 +49,7 @@ public class GuiCustomLabel extends Gui {
 
     public GuiCustomLabel(GuiCustom customGUI, Text text, int posX, int posY) {
         this.text = text;
+        this.text.text = new TextString(I18n.format((String) text.text.get(), (Object[]) new Object[0]));
         this.posX = posX;
         this.posY = posY;
         this.parent = customGUI;
