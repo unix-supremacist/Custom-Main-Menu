@@ -1,24 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.common.Loader
- *  cpw.mods.fml.common.eventhandler.EventPriority
- *  cpw.mods.fml.common.eventhandler.SubscribeEvent
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.gui.FontRenderer
- *  net.minecraft.client.gui.GuiButton
- *  net.minecraft.client.gui.GuiMainMenu
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraftforge.client.event.GuiOpenEvent
- *  net.minecraftforge.client.event.GuiScreenEvent
- *  net.minecraftforge.client.event.GuiScreenEvent$DrawScreenEvent
- *  net.minecraftforge.client.event.GuiScreenEvent$DrawScreenEvent$Post
- *  net.minecraftforge.client.event.GuiScreenEvent$InitGuiEvent
- *  net.minecraftforge.client.event.GuiScreenEvent$InitGuiEvent$Post
- *  org.apache.logging.log4j.Level
- *  org.apache.logging.log4j.Logger
- */
+
 package lumien.custommainmenu.handler;
 
 import cpw.mods.fml.common.Loader;

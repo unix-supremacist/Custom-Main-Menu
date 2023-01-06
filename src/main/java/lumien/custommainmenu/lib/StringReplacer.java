@@ -1,12 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.common.Loader
- *  net.minecraft.client.Minecraft
- *  net.minecraft.util.Session
- *  net.minecraftforge.common.ForgeVersion
- */
+
 package lumien.custommainmenu.lib;
 
 import cpw.mods.fml.common.Loader;

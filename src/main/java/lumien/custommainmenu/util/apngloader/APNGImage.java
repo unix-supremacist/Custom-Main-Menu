@@ -1,10 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  org.apache.commons.lang3.tuple.Triple
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.util.apngloader;
 
 import org.apache.commons.lang3.tuple.Triple;

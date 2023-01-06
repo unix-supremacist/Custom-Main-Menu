@@ -1,6 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- */
+
 package lumien.custommainmenu.lib.texts;
 
 public class TextString implements IText {

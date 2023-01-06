@@ -1,18 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.client.FMLClientHandler
- *  cpw.mods.fml.client.GuiOldSaveLoadConfirm
- *  cpw.mods.fml.common.FMLLog
- *  cpw.mods.fml.common.StartupQuery
- *  cpw.mods.fml.common.StartupQuery$AbortedException
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraft.nbt.CompressedStreamTools
- *  net.minecraft.nbt.NBTTagCompound
- *  net.minecraft.world.WorldSettings
- */
+
 package lumien.custommainmenu.lib.actions;
 
 import cpw.mods.fml.client.FMLClientHandler;

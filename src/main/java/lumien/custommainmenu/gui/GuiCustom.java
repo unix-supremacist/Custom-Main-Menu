@@ -1,35 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.common.eventhandler.Event
- *  cpw.mods.fml.common.eventhandler.EventBus
- *  cpw.mods.fml.relauncher.Side
- *  cpw.mods.fml.relauncher.SideOnly
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.audio.SoundHandler
- *  net.minecraft.client.gui.FontRenderer
- *  net.minecraft.client.gui.GuiButton
- *  net.minecraft.client.gui.GuiLabel
- *  net.minecraft.client.gui.GuiMainMenu
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraft.client.gui.GuiYesNoCallback
- *  net.minecraft.client.renderer.Tessellator
- *  net.minecraft.client.renderer.texture.DynamicTexture
- *  net.minecraft.client.renderer.texture.TextureManager
- *  net.minecraft.client.shader.Framebuffer
- *  net.minecraft.util.MathHelper
- *  net.minecraft.util.ResourceLocation
- *  net.minecraftforge.client.event.GuiScreenEvent
- *  net.minecraftforge.client.event.GuiScreenEvent$ActionPerformedEvent
- *  net.minecraftforge.client.event.GuiScreenEvent$ActionPerformedEvent$Post
- *  net.minecraftforge.client.event.GuiScreenEvent$ActionPerformedEvent$Pre
- *  net.minecraftforge.common.MinecraftForge
- *  org.apache.logging.log4j.Logger
- *  org.lwjgl.input.Keyboard
- *  org.lwjgl.opengl.GL11
- *  org.lwjgl.util.glu.Project
- */
+
 package lumien.custommainmenu.gui;
 
 import cpw.mods.fml.common.eventhandler.Event;

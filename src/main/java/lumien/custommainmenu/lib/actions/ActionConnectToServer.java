@@ -1,11 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.client.FMLClientHandler
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraft.client.multiplayer.ServerData
- */
+
 package lumien.custommainmenu.lib.actions;
 
 import cpw.mods.fml.client.FMLClientHandler;

@@ -1,18 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  com.google.common.base.Strings
- *  cpw.mods.fml.common.FMLCommonHandler
- *  cpw.mods.fml.common.Loader
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.audio.ISound
- *  net.minecraft.client.audio.PositionedSoundRecord
- *  net.minecraft.client.audio.SoundHandler
- *  net.minecraft.client.gui.FontRenderer
- *  net.minecraft.client.gui.Gui
- *  net.minecraft.util.ResourceLocation
- */
+
 package lumien.custommainmenu.gui;
 
 import com.google.common.base.Strings;

@@ -1,9 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.util;
 
 import org.lwjgl.opengl.GL11;

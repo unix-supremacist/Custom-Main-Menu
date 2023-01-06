@@ -1,12 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.relauncher.Side
- *  cpw.mods.fml.relauncher.SideOnly
- *  net.minecraft.client.renderer.OpenGlHelper
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.util;
 
 import cpw.mods.fml.relauncher.Side;

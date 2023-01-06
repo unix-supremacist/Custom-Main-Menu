@@ -1,9 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- */
+
 package lumien.custommainmenu.lib.actions;
 
 import java.awt.Desktop;

@@ -1,13 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.renderer.texture.TextureUtil
- *  org.apache.commons.io.IOUtils
- *  org.apache.logging.log4j.Level
- *  org.apache.logging.log4j.Logger
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.lib.textures;
 
 import java.awt.image.BufferedImage;
@@ -88,9 +79,7 @@ public class TextureURL implements ITexture {
         this.textureID = textureID;
     }
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     */
+    
     public static BufferedImage readBufferedImage(InputStream imageStream) throws IOException {
         BufferedImage bufferedimage;
         try {

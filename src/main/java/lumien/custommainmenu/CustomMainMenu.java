@@ -1,23 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.common.FMLCommonHandler
- *  cpw.mods.fml.common.Mod
- *  cpw.mods.fml.common.Mod$EventHandler
- *  cpw.mods.fml.common.Mod$Instance
- *  cpw.mods.fml.common.event.FMLInterModComms
- *  cpw.mods.fml.common.event.FMLPostInitializationEvent
- *  cpw.mods.fml.common.event.FMLPreInitializationEvent
- *  cpw.mods.fml.common.eventhandler.EventBus
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.renderer.texture.TextureManager
- *  net.minecraft.nbt.NBTTagCompound
- *  net.minecraft.util.ResourceLocation
- *  net.minecraftforge.common.MinecraftForge
- *  org.apache.logging.log4j.Level
- *  org.apache.logging.log4j.Logger
- */
+
 package lumien.custommainmenu;
 
 import cpw.mods.fml.common.FMLCommonHandler;

@@ -1,9 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  javax.vecmath.Vector2f
- */
+
 package lumien.custommainmenu.util;
 
 import javax.vecmath.Vector2f;

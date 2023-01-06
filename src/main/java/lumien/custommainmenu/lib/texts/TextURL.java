@@ -1,6 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- */
+
 package lumien.custommainmenu.lib.texts;
 
 import java.net.MalformedURLException;
@@ -21,9 +19,7 @@ public class TextURL implements IText {
         new LoadStringURL(this).start();
     }
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     */
+    
     @Override
     public String get() {
         String string = this.string;

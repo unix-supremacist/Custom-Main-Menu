@@ -1,10 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.gui.GuiButton
- */
+
 package lumien.custommainmenu.gui;
 
 import lumien.custommainmenu.configuration.elements.Button;

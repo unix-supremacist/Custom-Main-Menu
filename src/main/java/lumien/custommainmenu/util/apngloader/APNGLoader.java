@@ -1,13 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  com.google.common.primitives.Ints
- *  com.google.common.primitives.Shorts
- *  org.apache.commons.lang3.tuple.Triple
- *  org.lwjgl.BufferUtils
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.util.apngloader;
 
 import com.google.common.primitives.Ints;

@@ -1,12 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.resources.IResource
- *  net.minecraft.client.resources.IResourceManager
- *  net.minecraft.util.ResourceLocation
- */
+
 package lumien.custommainmenu.lib.texts;
 
 import java.io.BufferedReader;

@@ -1,12 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.gui.GuiMainMenu
- *  net.minecraft.client.gui.GuiScreen
- *  org.lwjgl.input.Keyboard
- */
+
 package lumien.custommainmenu.lib.actions;
 
 import lumien.custommainmenu.CustomMainMenu;

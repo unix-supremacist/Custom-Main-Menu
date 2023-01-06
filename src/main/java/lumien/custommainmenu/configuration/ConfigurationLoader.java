@@ -1,14 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  com.google.common.io.ByteStreams
- *  com.google.gson.JsonElement
- *  com.google.gson.JsonObject
- *  com.google.gson.JsonParser
- *  com.google.gson.stream.JsonReader
- *  org.apache.commons.io.IOUtils
- */
+
 package lumien.custommainmenu.configuration;
 
 import com.google.common.io.ByteStreams;
@@ -35,14 +25,7 @@ public class ConfigurationLoader {
         this.config = config;
     }
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     * Loose catch block
-     * Enabled aggressive block sorting
-     * Enabled unnecessary exception pruning
-     * Enabled aggressive exception aggregation
-     * Lifted jumps to return sites
-     */
+    
     public void load() throws Exception {
         JsonReader reader;
         File[] jsonFiles;

@@ -1,12 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  com.google.common.primitives.Ints
- *  org.apache.commons.lang3.tuple.Triple
- *  org.lwjgl.BufferUtils
- *  org.lwjgl.opengl.GL11
- */
+
 package lumien.custommainmenu.util.pngloader;
 
 import com.google.common.primitives.Ints;

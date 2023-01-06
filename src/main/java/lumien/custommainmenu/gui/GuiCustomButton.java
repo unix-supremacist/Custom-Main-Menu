@@ -1,18 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.audio.ISound
- *  net.minecraft.client.audio.PositionedSoundRecord
- *  net.minecraft.client.audio.SoundHandler
- *  net.minecraft.client.gui.FontRenderer
- *  net.minecraft.client.gui.GuiButton
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraft.client.renderer.texture.TextureManager
- *  net.minecraft.client.resources.I18n
- *  net.minecraft.util.ResourceLocation
- */
+
 package lumien.custommainmenu.gui;
 
 import java.util.List;

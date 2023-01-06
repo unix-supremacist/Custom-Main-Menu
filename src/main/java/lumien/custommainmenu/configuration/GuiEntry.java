@@ -1,10 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.settings.GameSettings
- */
+
 package lumien.custommainmenu.configuration;
 
 import lumien.custommainmenu.gui.GuiCustom;

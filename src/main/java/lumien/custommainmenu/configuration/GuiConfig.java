@@ -1,13 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  com.google.gson.JsonArray
- *  com.google.gson.JsonElement
- *  com.google.gson.JsonObject
- *  org.apache.logging.log4j.Level
- *  org.apache.logging.log4j.Logger
- */
+
 package lumien.custommainmenu.configuration;
 
 import com.google.gson.JsonArray;

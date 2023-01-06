@@ -1,28 +1,4 @@
-/*
- * Decompiled with CFR 0.148.
- *
- * Could not load the following classes:
- *  cpw.mods.fml.client.GuiModList
- *  net.minecraft.client.Minecraft
- *  net.minecraft.client.gui.GuiControls
- *  net.minecraft.client.gui.GuiCreateWorld
- *  net.minecraft.client.gui.GuiLanguage
- *  net.minecraft.client.gui.GuiMainMenu
- *  net.minecraft.client.gui.GuiMultiplayer
- *  net.minecraft.client.gui.GuiOptions
- *  net.minecraft.client.gui.GuiScreen
- *  net.minecraft.client.gui.GuiScreenOptionsSounds
- *  net.minecraft.client.gui.GuiScreenResourcePacks
- *  net.minecraft.client.gui.GuiSelectWorld
- *  net.minecraft.client.gui.GuiSnooper
- *  net.minecraft.client.gui.GuiVideoSettings
- *  net.minecraft.client.gui.ScreenChatOptions
- *  net.minecraft.client.gui.stream.GuiStreamOptions
- *  net.minecraft.client.gui.stream.GuiStreamUnavailable
- *  net.minecraft.client.resources.LanguageManager
- *  net.minecraft.client.settings.GameSettings
- *  net.minecraft.client.stream.IStream
- */
+
 package lumien.custommainmenu.lib.actions;
 
 import cpw.mods.fml.client.GuiModList;
