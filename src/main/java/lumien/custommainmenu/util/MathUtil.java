@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util;
 
 import javax.vecmath.Vector2f;

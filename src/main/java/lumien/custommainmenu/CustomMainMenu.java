@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu;
 
 import cpw.mods.fml.common.FMLCommonHandler;

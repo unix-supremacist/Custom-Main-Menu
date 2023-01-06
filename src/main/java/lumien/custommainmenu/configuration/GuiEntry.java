@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration;
 
 import lumien.custommainmenu.gui.GuiCustom;

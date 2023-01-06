@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.textures;
 
 import net.minecraft.client.Minecraft;

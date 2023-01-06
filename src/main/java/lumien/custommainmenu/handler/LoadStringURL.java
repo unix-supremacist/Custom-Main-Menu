@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.handler;
 
 import java.io.BufferedReader;
@@ -14,7 +13,6 @@ public class LoadStringURL extends Thread {
         this.setDaemon(true);
     }
 
-    
     @Override
     public void run() {
         String newInput;

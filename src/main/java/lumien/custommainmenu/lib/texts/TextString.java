@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.texts;
 
 public class TextString implements IText {

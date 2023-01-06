@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.actions;
 
 import java.awt.Desktop;

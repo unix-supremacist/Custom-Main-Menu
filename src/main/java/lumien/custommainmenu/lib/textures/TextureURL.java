@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.textures;
 
 import java.awt.image.BufferedImage;
@@ -79,7 +78,6 @@ public class TextureURL implements ITexture {
         this.textureID = textureID;
     }
 
-    
     public static BufferedImage readBufferedImage(InputStream imageStream) throws IOException {
         BufferedImage bufferedimage;
         try {

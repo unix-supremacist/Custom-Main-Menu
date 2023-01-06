@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.texts;
 
 import java.net.MalformedURLException;
@@ -19,7 +18,6 @@ public class TextURL implements IText {
         new LoadStringURL(this).start();
     }
 
-    
     @Override
     public String get() {
         String string = this.string;

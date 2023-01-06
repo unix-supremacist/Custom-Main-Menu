@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.gui;
 
 import net.minecraft.client.Minecraft;

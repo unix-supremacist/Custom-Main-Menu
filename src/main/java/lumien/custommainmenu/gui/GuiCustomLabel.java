@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.gui;
 
 import com.google.common.base.Strings;

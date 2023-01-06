@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib;
 
 public class Reference {

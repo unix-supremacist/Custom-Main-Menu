@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.actions;
 
 import cpw.mods.fml.client.FMLClientHandler;

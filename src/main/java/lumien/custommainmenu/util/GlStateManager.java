@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util;
 
 import cpw.mods.fml.relauncher.Side;

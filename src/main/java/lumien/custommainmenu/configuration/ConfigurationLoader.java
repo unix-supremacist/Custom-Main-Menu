@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration;
 
 import com.google.common.io.ByteStreams;
@@ -25,7 +24,6 @@ public class ConfigurationLoader {
         this.config = config;
     }
 
-    
     public void load() throws Exception {
         JsonReader reader;
         File[] jsonFiles;

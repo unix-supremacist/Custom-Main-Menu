@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration;
 
 public class Alignment {

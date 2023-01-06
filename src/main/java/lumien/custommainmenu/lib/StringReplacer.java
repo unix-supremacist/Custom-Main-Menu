@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib;
 
 import cpw.mods.fml.common.Loader;

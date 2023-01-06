@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration.elements;
 
 import lumien.custommainmenu.configuration.Alignment;

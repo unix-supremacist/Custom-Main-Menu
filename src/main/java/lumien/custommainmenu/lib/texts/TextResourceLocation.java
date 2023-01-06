@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.lib.texts;
 
 import java.io.BufferedReader;

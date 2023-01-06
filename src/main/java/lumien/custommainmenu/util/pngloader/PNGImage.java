@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util.pngloader;
 
 import org.apache.commons.lang3.tuple.Triple;

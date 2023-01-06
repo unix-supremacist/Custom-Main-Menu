@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util.pngloader;
 
 import com.google.common.primitives.Ints;

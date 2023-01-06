@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util.apngloader;
 
 public class Frame {

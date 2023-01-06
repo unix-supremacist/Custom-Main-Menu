@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration.elements;
 
 import java.util.Arrays;

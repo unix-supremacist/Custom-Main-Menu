@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.handler;
 
 import java.awt.image.BufferedImage;

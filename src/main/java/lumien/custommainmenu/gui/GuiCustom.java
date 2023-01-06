@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.gui;
 
 import cpw.mods.fml.common.eventhandler.Event;

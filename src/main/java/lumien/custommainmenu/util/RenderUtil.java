@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.util;
 
 import org.lwjgl.opengl.GL11;

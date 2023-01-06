@@ -1,4 +1,3 @@
-
 package lumien.custommainmenu.configuration;
 
 import java.util.HashMap;
