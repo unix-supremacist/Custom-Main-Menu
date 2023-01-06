@@ -17,11 +17,11 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = "CustomMainMenu", name = "Custom Main Menu", version = "1.9.2")
+@Mod(modid = CustomMainMenu.MOD_ID, name = CustomMainMenu.MOD_NAME, version = CustomMainMenu.VERSION)
 public class CustomMainMenu {
     public static final String MOD_ID = "CustomMainMenu";
     public static final String MOD_NAME = "Custom Main Menu";
-    public static final String MOD_VERSION = "1.9.2";
+    public static final String MOD_VERSION = "GRADLETOKEN_VERSION";
 
     @Mod.Instance(value = "CustomMainMenu")
     public static CustomMainMenu INSTANCE;
