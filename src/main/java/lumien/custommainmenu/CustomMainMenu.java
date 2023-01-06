@@ -22,7 +22,7 @@ public class CustomMainMenu {
     public static final String MOD_NAME = "GRADLETOKEN_MODNAME";
     public static final String MOD_VERSION = "GRADLETOKEN_VERSION";
 
-    @Mod.Instance(value = "CustomMainMenu")
+    @Mod.Instance(value = CustomMainMenu.MOD_ID)
     public static CustomMainMenu INSTANCE;
 
     public static CMMEventHandler EVENT_HANDLER;
