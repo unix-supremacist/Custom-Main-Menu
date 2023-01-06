@@ -40,7 +40,7 @@ import org.apache.logging.log4j.Logger;
 public class CustomMainMenu {
     public static final String MOD_ID = "CustomMainMenu";
     public static final String MOD_NAME = "Custom Main Menu";
-    public static final String MOD_VERSION = "1.9.2";
+    public static final String MOD_VERSION = "GRADLETOKEN_VERSION";
 
     @Mod.Instance(value = "CustomMainMenu")
     public static CustomMainMenu INSTANCE;
