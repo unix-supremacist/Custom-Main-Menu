@@ -49,7 +49,7 @@ public class GuiCustomLabel extends Gui {
 
     public GuiCustomLabel(GuiCustom customGUI, Text text, int posX, int posY) {
         this.text = text;
-        this.text.text = new TextString(I18n.format((String) text.text.get(), (Object[]) new Object[0]));
+        this.text.text = this.text.hoverText = new TextString(I18n.format((String) text.text.get(), (Object[]) new Object[0]));
         this.posX = posX;
         this.posY = posY;
         this.parent = customGUI;
