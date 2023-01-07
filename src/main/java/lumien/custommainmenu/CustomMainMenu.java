@@ -18,8 +18,8 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = CustomMainMenu.MOD_ID, name = CustomMainMenu.MOD_NAME, version = CustomMainMenu.MOD_VERSION)
 public class CustomMainMenu {
-    public static final String MOD_ID = "GRADLETOKEN_MODID";
-    public static final String MOD_NAME = "GRADLETOKEN_MODNAME";
+    public static final String MOD_ID = "custommainmenu";
+    public static final String MOD_NAME = "Custom Main Menu";
     public static final String MOD_VERSION = "GRADLETOKEN_VERSION";
 
     @Mod.Instance(value = CustomMainMenu.MOD_ID)
