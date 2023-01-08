@@ -1,242 +1,141 @@
 package lumien.custommainmenu.gui;
 
+import com.google.common.base.Strings;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-
-import javax.vecmath.Vector2f;
-
-import org.lwjgl.opengl.GL11;
-
-import lumien.custommainmenu.configuration.elements.Label;
-import lumien.custommainmenu.lib.ANCHOR;
+import lumien.custommainmenu.configuration.elements.Text;
 import lumien.custommainmenu.lib.StringReplacer;
 import lumien.custommainmenu.lib.texts.TextString;
-import lumien.custommainmenu.util.MathUtil;
+import lumien.custommainmenu.util.GlStateManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.client.audio.ISound.AttenuationType;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.common.ForgeVersion;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 
-public class GuiCustomLabel extends Gui
-{
-	Label text;
-	int posX, posY;
+public class GuiCustomLabel extends Gui {
+    Text text;
+    int posX;
+    int posY;
+    FontRenderer fontRendererObj;
+    int width;
+    int height;
+    GuiCustom parent;
+    static final String TIME_FORMAT = "HH:mm";
+    static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+    static Field mcpversionField;
+    public static String mcpversion;
+    boolean hovered;
 
-	FontRenderer fontRendererObj;
+    public GuiCustomLabel(GuiCustom customGUI, Text text, int posX, int posY) {
+        this.text = text;
+        this.text.text =
+                this.text.hoverText = new TextString(I18n.format((String) text.text.get(), (Object[]) new Object[0]));
+        this.posX = posX;
+        this.posY = posY;
+        this.parent = customGUI;
+        this.fontRendererObj = Minecraft.getMinecraft().fontRenderer;
+        this.hovered = false;
+        this.width = this.fontRendererObj.getStringWidth(text.text.get());
+        this.height = this.fontRendererObj.FONT_HEIGHT;
+        if (text.name.equals("fml")) {
+            String string = "";
+            List brandings = FMLCommonHandler.instance().getBrandings(true);
+            for (int i = 0; i < brandings.size(); ++i) {
+                String brd = (String) brandings.get(i);
+                if (Strings.isNullOrEmpty((String) brd)) continue;
+                string = string + brd + (i < brandings.size() - 1 ? "\n" : "");
+            }
+            this.text.text = this.text.hoverText = new TextString(string);
+        }
+    }
 
-	int width;
-	int height;
+    public void drawLabel(Minecraft mc, int mouseX, int mouseY) {
+        if (this.text.fontSize != 1.0f) {
+            GlStateManager.translate(this.posX, this.posY, 0.0f);
+            GlStateManager.scale(this.text.fontSize, this.text.fontSize, 1.0f);
+            GlStateManager.translate(-this.posX, -this.posY, 0.0f);
+        }
+        String toDraw = this.hovered ? this.text.hoverText.get() : this.text.text.get();
+        boolean newHovered = this.isMouseAboveLabel(mouseX, mouseY);
+        if (newHovered && !this.hovered && this.text.hoverSound != null) {
+            Minecraft.getMinecraft().getSoundHandler().playSound((ISound) PositionedSoundRecord.func_147674_a(
+                    (ResourceLocation) new ResourceLocation(this.text.hoverSound), (float) 1.0f));
+        }
+        this.hovered = newHovered;
+        if (toDraw.contains("\n")) {
+            String[] lines;
+            int modY = 0;
+            for (String line : lines = toDraw.split("\n")) {
+                String lineDraw = StringReplacer.replacePlaceholders(line);
+                if (this.hovered) {
+                    this.drawString(this.fontRendererObj, lineDraw, this.posX, this.posY + modY, this.text.hoverColor);
+                } else {
+                    this.drawString(this.fontRendererObj, lineDraw, this.posX, this.posY + modY, this.text.color);
+                }
+                modY += this.fontRendererObj.FONT_HEIGHT;
+            }
+        } else {
+            toDraw = StringReplacer.replacePlaceholders(toDraw);
+            if (this.hovered) {
+                this.drawString(this.fontRendererObj, toDraw, this.posX, this.posY, this.text.hoverColor);
+            } else {
+                this.drawString(this.fontRendererObj, toDraw, this.posX, this.posY, this.text.color);
+            }
+        }
+        if (this.text.fontSize != 1.0f) {
+            GlStateManager.translate(this.posX, this.posY, 0.0f);
+            GlStateManager.scale(1.0f / this.text.fontSize, 1.0f / this.text.fontSize, 1.0f);
+            GlStateManager.translate(-this.posX, -this.posY, 0.0f);
+        }
+    }
 
-	GuiCustom parent;
+    private boolean isMouseAboveLabel(int mouseX, int mouseY) {
+        String stringText = this.text.text.get();
+        if (stringText.contains("\n")) {
+            String[] lines = stringText.split("\n");
+            for (int i = 0; i < lines.length; ++i) {
+                int width = this.fontRendererObj.getStringWidth(lines[i]);
+                int height = this.fontRendererObj.FONT_HEIGHT;
+                if (mouseX < this.posX
+                        || mouseY < this.posY + this.fontRendererObj.FONT_HEIGHT * i
+                        || mouseX >= this.posX + width
+                        || mouseY >= this.posY + this.fontRendererObj.FONT_HEIGHT * i + height) continue;
+                return true;
+            }
+            return false;
+        }
+        int width = this.fontRendererObj.getStringWidth(stringText);
+        int height = this.fontRendererObj.FONT_HEIGHT;
+        return mouseX >= this.posX && mouseY >= this.posY && mouseX < this.posX + width && mouseY < this.posY + height;
+    }
 
-	static final String TIME_FORMAT = "HH:mm";
-	static final SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT);
-	static Field mcpversionField;
-	public static String mcpversion;
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        boolean flag = this.isMouseAboveLabel(mouseX, mouseY);
+        if (flag && this.text.action != null) {
+            if (this.text.pressSound != null) {
+                Minecraft.getMinecraft().getSoundHandler().playSound((ISound) PositionedSoundRecord.func_147674_a(
+                        (ResourceLocation) new ResourceLocation(this.text.pressSound), (float) 1.0f));
+            } else {
+                Minecraft.getMinecraft().getSoundHandler().playSound((ISound) PositionedSoundRecord.func_147674_a(
+                        (ResourceLocation) new ResourceLocation("gui.button.press"), (float) 1.0f));
+            }
+            this.text.action.perform(this.text, this.parent);
+        }
+    }
 
-	boolean hovered;
-
-	static
-	{
-		try
-		{
-			mcpversionField = Loader.class.getDeclaredField("mcpversion");
-			mcpversionField.setAccessible(true);
-			mcpversion = (String) mcpversionField.get(null);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public GuiCustomLabel(GuiCustom customGUI, Label text, int posX, int posY)
-	{
-		this.text = text;
-		this.posX = posX;
-		this.posY = posY;
-		this.parent = customGUI;
-		fontRendererObj = Minecraft.getMinecraft().fontRenderer;
-
-		hovered = false;
-
-		width = fontRendererObj.getStringWidth(text.text.get());
-		height = fontRendererObj.FONT_HEIGHT;
-
-		if (text.name.equals("fml"))
-		{
-			String string = "";
-			List<String> brandings = FMLCommonHandler.instance().getBrandings(true);
-			for (int i = 0; i < brandings.size(); i++)
-			{
-				String brd = brandings.get(i);
-				if (!com.google.common.base.Strings.isNullOrEmpty(brd))
-				{
-					string += brd + ((i < brandings.size() - 1) ? "\n" : "");
-				}
-			}
-
-			this.text.text = this.text.hoverText = new TextString(string);
-		}
-	}
-
-	public void drawLabel(Minecraft mc, int mouseX, int mouseY)
-	{
-		if (text.fontSize != 1F)
-		{
-			GlStateManager.translate(posX, posY, 0);
-			GlStateManager.scale(text.fontSize, text.fontSize, 1);
-			GlStateManager.translate(-posX, -posY, 0);
-		}
-
-		String toDraw = hovered ? text.hoverText.get() : text.text.get();
-
-		boolean newHovered = isMouseAboveLabel(mouseX, mouseY);
-
-		if (newHovered && !hovered && text.hoverSound != null)
-		{
-			Minecraft.getMinecraft().getSoundHandler().playSound(new PositionedSoundRecord(new ResourceLocation(text.hoverSound), SoundCategory.MASTER, 1F, 1F, false, 0, AttenuationType.NONE, 0, 0, 0));
-		}
-
-		hovered = newHovered;
-
-		if (toDraw.contains("\n"))
-		{
-			int modY = 0;
-			String[] lines = toDraw.split("\n");
-			for (String line : lines)
-			{
-				String lineDraw = StringReplacer.replacePlaceholders(line);
-
-				int textWidth = fontRendererObj.getStringWidth(lineDraw);
-
-				int offsetX = text.anchor == ANCHOR.START ? 0 : (text.anchor == ANCHOR.MIDDLE ? -(textWidth / 2) : (-textWidth));
-
-				if (hovered)
-				{
-					this.drawString(fontRendererObj, lineDraw, posX + offsetX, posY + modY, text.hoverColor);
-				}
-				else
-				{
-					this.drawString(fontRendererObj, lineDraw, posX + offsetX, posY + modY, text.color);
-				}
-
-				modY += fontRendererObj.FONT_HEIGHT;
-			}
-		}
-		else
-		{
-			toDraw = StringReplacer.replacePlaceholders(toDraw);
-			int textWidth = fontRendererObj.getStringWidth(toDraw);
-
-			int offsetX = text.anchor == ANCHOR.START ? 0 : (text.anchor == ANCHOR.MIDDLE ? -(textWidth / 2) : (-textWidth));
-
-			if (hovered)
-			{
-				this.drawString(fontRendererObj, toDraw, posX + offsetX, posY, text.hoverColor);
-			}
-			else
-			{
-				this.drawString(fontRendererObj, toDraw, posX + offsetX, posY, text.color);
-			}
-		}
-
-		if (text.fontSize != 1F)
-		{
-			GlStateManager.translate(posX, posY, 0);
-			GlStateManager.scale(1 / text.fontSize, 1 / text.fontSize, 1);
-			GlStateManager.translate(-posX, -posY, 0);
-		}
-	}
-
-	private boolean isMouseAboveLabel(int mouseX, int mouseY)
-	{
-		String stringText = this.text.text.get();
-
-		if (stringText.contains("\n"))
-		{
-			String[] lines = stringText.split("\n");
-
-			for (int i = 0; i < lines.length; i++)
-			{
-				int width = this.fontRendererObj.getStringWidth(lines[i]);
-				int height = this.fontRendererObj.FONT_HEIGHT;
-				
-				int modX = 0;
-
-				switch (text.anchor)
-				{
-					case END:
-						modX = -width;
-						break;
-					case MIDDLE:
-						modX = -width / 2;
-						break;
-					case START:
-						break;
-					default:
-						break;
-				}
-
-				if (mouseX >= posX + modX && mouseY >= posY + this.fontRendererObj.FONT_HEIGHT * i && mouseX < posX + width + modX && mouseY < posY + this.fontRendererObj.FONT_HEIGHT * i + height)
-				{
-					return true;
-				}
-			}
-
-			return false;
-		}
-		else
-		{
-			int width = this.fontRendererObj.getStringWidth(stringText);
-			int height = this.fontRendererObj.FONT_HEIGHT;
-
-			// Anchor Difference
-			int modX = 0;
-
-			switch (text.anchor)
-			{
-				case END:
-					modX = -width;
-					break;
-				case MIDDLE:
-					modX = -width / 2;
-					break;
-				case START:
-					break;
-				default:
-					break;
-			}
-
-			return mouseX >= posX + modX && mouseY >= posY && mouseX < posX + width + modX && mouseY < posY + height;
-		}
-	}
-
-	public void mouseClicked(int mouseX, int mouseY, int mouseButton)
-	{
-		boolean flag = isMouseAboveLabel(mouseX, mouseY);
-
-		if (flag && text.action != null)
-		{
-			if (text.pressSound != null)
-			{
-				Minecraft.getMinecraft().getSoundHandler().playSound(new PositionedSoundRecord(new ResourceLocation(text.pressSound), SoundCategory.MASTER, 1F, 1F, false, 0, AttenuationType.NONE, 0, 0, 0));
-			}
-			else
-			{
-				Minecraft.getMinecraft().getSoundHandler().playSound(new PositionedSoundRecord(new ResourceLocation("ui.button.click"), SoundCategory.MASTER, 1F, 1F, false, 0, AttenuationType.NONE, 0, 0, 0));
-			}
-
-			text.action.perform(this.text, parent);
-		}
-	}
+    static {
+        try {
+            mcpversionField = Loader.class.getDeclaredField("mcpversion");
+            mcpversionField.setAccessible(true);
+            mcpversion = (String) mcpversionField.get(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
