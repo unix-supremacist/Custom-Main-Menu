@@ -16,7 +16,7 @@
 		"parent": "",
 		"requiredMods": [],
 		"dependencies": [],
-		"dependants": [],
-		"useDependencyInformation": true
-	}
+		"dependants": []
+	}]
+}
 ]
