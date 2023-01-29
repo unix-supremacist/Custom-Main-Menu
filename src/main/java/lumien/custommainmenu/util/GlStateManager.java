@@ -1,13 +1,17 @@
 package lumien.custommainmenu.util;
 
+import java.nio.FloatBuffer;
+
+import net.minecraft.client.renderer.OpenGlHelper;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.nio.FloatBuffer;
-import net.minecraft.client.renderer.OpenGlHelper;
-import org.lwjgl.opengl.GL11;
 
 @SideOnly(value = Side.CLIENT)
 public class GlStateManager {
+
     private static AlphaState alphaState;
     private static BooleanState lightingState;
     private static BooleanState[] lightState;
@@ -29,7 +33,6 @@ public class GlStateManager {
     private static ColorMask colorMaskState;
     private static Color colorState;
     private static Viewport viewportState;
-    private static final String __OBFID = "CL_00002558";
 
     public static void pushAttrib() {
         GL11.glPushAttrib((int) 8256);
@@ -175,13 +178,8 @@ public class GlStateManager {
         GL11.glGetFloat((int) p_179111_0_, (FloatBuffer) p_179111_1_);
     }
 
-    public static void ortho(
-            double p_179130_0_,
-            double p_179130_2_,
-            double p_179130_4_,
-            double p_179130_6_,
-            double p_179130_8_,
-            double p_179130_10_) {
+    public static void ortho(double p_179130_0_, double p_179130_2_, double p_179130_4_, double p_179130_6_,
+            double p_179130_8_, double p_179130_10_) {
         GL11.glOrtho(
                 (double) p_179130_0_,
                 (double) p_179130_2_,
@@ -267,11 +265,11 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class Viewport {
+
         public int x = 0;
         public int y = 0;
         public int width = 0;
         public int height = 0;
-        private static final String __OBFID = "CL_00002538";
 
         private Viewport() {}
 
@@ -282,9 +280,9 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class TextureState {
+
         public BooleanState texture2DState = new BooleanState(3553);
         public int textureName = 0;
-        private static final String __OBFID = "CL_00002539";
 
         private TextureState() {}
 
@@ -295,11 +293,11 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class TexGenState {
+
         public TexGenCoord field_179064_a = new TexGenCoord(8192, 3168);
         public TexGenCoord field_179062_b = new TexGenCoord(8193, 3169);
         public TexGenCoord field_179063_c = new TexGenCoord(8194, 3170);
         public TexGenCoord field_179061_d = new TexGenCoord(8195, 3171);
-        private static final String __OBFID = "CL_00002540";
 
         private TexGenState() {}
 
@@ -310,10 +308,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class TexGenCoord {
+
         public BooleanState field_179067_a;
         public int field_179065_b;
         public int field_179066_c = -1;
-        private static final String __OBFID = "CL_00002541";
 
         public TexGenCoord(int p_i46254_1_, int p_i46254_2_) {
             this.field_179065_b = p_i46254_1_;
@@ -328,13 +326,12 @@ public class GlStateManager {
         R,
         Q;
 
-        private static final String __OBFID = "CL_00002542";
     }
 
     @SideOnly(value = Side.CLIENT)
     static final class SwitchTexGen {
+
         static final int[] field_179175_a = new int[TexGen.values().length];
-        private static final String __OBFID = "CL_00002557";
 
         SwitchTexGen() {}
 
@@ -364,12 +361,12 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class StencilState {
+
         public StencilFunc field_179078_a = new StencilFunc(null);
         public int field_179076_b = -1;
         public int field_179077_c = 7680;
         public int field_179074_d = 7680;
         public int field_179075_e = 7680;
-        private static final String __OBFID = "CL_00002543";
 
         private StencilState() {}
 
@@ -380,10 +377,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class StencilFunc {
+
         public int field_179081_a = 519;
         public int field_179079_b = 0;
         public int field_179080_c = -1;
-        private static final String __OBFID = "CL_00002544";
 
         private StencilFunc() {}
 
@@ -394,11 +391,11 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class PolygonOffsetState {
+
         public BooleanState field_179044_a = new BooleanState(32823);
         public BooleanState field_179042_b = new BooleanState(10754);
         public float field_179043_c = 0.0f;
         public float field_179041_d = 0.0f;
-        private static final String __OBFID = "CL_00002545";
 
         private PolygonOffsetState() {}
 
@@ -409,12 +406,12 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class FogState {
+
         public BooleanState field_179049_a = new BooleanState(2912);
         public int field_179047_b = 2048;
         public float field_179048_c = 1.0f;
         public float field_179045_d = 0.0f;
         public float field_179046_e = 1.0f;
-        private static final String __OBFID = "CL_00002546";
 
         private FogState() {}
 
@@ -425,10 +422,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class DepthState {
+
         public BooleanState depthTest = new BooleanState(2929);
         public boolean maskEnabled = true;
         public int depthFunc = 513;
-        private static final String __OBFID = "CL_00002547";
 
         private DepthState() {}
 
@@ -439,9 +436,9 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class CullState {
+
         public BooleanState field_179054_a = new BooleanState(2884);
         public int field_179053_b = 1029;
-        private static final String __OBFID = "CL_00002548";
 
         private CullState() {}
 
@@ -452,10 +449,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class ColorMaterialState {
+
         public BooleanState field_179191_a = new BooleanState(2903);
         public int field_179189_b = 1032;
         public int field_179190_c = 5634;
-        private static final String __OBFID = "CL_00002549";
 
         private ColorMaterialState() {}
 
@@ -466,11 +463,11 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class ColorMask {
+
         public boolean field_179188_a = true;
         public boolean field_179186_b = true;
         public boolean field_179187_c = true;
         public boolean field_179185_d = true;
-        private static final String __OBFID = "CL_00002550";
 
         private ColorMask() {}
 
@@ -481,9 +478,9 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class ColorLogicState {
+
         public BooleanState field_179197_a = new BooleanState(3058);
         public int field_179196_b = 5379;
-        private static final String __OBFID = "CL_00002551";
 
         private ColorLogicState() {}
 
@@ -494,11 +491,11 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class Color {
+
         public float red = 1.0f;
         public float green = 1.0f;
         public float blue = 1.0f;
         public float alpha = 1.0f;
-        private static final String __OBFID = "CL_00002552";
 
         public Color() {}
 
@@ -512,10 +509,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class ClearState {
+
         public double field_179205_a = 1.0;
         public Color field_179203_b = new Color(0.0f, 0.0f, 0.0f, 0.0f);
         public int field_179204_c = 0;
-        private static final String __OBFID = "CL_00002553";
 
         private ClearState() {}
 
@@ -526,9 +523,9 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class BooleanState {
+
         private final int capability;
         private boolean currentState = false;
-        private static final String __OBFID = "CL_00002554";
 
         public BooleanState(int p_i46267_1_) {
             this.capability = p_i46267_1_;
@@ -556,12 +553,12 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class BlendState {
+
         public BooleanState field_179213_a = new BooleanState(3042);
         public int field_179211_b = 1;
         public int field_179212_c = 0;
         public int field_179209_d = 1;
         public int field_179210_e = 0;
-        private static final String __OBFID = "CL_00002555";
 
         private BlendState() {}
 
@@ -572,10 +569,10 @@ public class GlStateManager {
 
     @SideOnly(value = Side.CLIENT)
     static class AlphaState {
+
         public BooleanState field_179208_a = new BooleanState(3008);
         public int field_179206_b = 519;
         public float field_179207_c = -1.0f;
-        private static final String __OBFID = "CL_00002556";
 
         private AlphaState() {}
 

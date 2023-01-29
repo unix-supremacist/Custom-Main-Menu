@@ -1,11 +1,14 @@
 package lumien.custommainmenu.lib.actions;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import lumien.custommainmenu.gui.GuiCustom;
+
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.ServerData;
 
+import cpw.mods.fml.client.FMLClientHandler;
+
 public class ActionConnectToServer implements IAction {
+
     String ip;
     String serverName;
 

@@ -3,6 +3,7 @@ package lumien.custommainmenu.util;
 import javax.vecmath.Vector2f;
 
 public class MathUtil {
+
     public static boolean isPointInPolygon(Vector2f point, Vector2f... polygonPoints) {
         for (int i = 0; i < polygonPoints.length; ++i) {
             Vector2f p1 = polygonPoints[i];

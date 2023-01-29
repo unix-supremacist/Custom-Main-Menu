@@ -1,13 +1,11 @@
 package lumien.custommainmenu.configuration;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.configuration.elements.Background;
 import lumien.custommainmenu.configuration.elements.Button;
@@ -32,9 +30,15 @@ import lumien.custommainmenu.lib.texts.TextURL;
 import lumien.custommainmenu.lib.textures.ITexture;
 import lumien.custommainmenu.lib.textures.TextureResourceLocation;
 import lumien.custommainmenu.lib.textures.TextureURL;
+
 import org.apache.logging.log4j.Level;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 public class GuiConfig {
+
     public String name;
     public int guiScale;
     public ArrayList<Button> customButtons;
@@ -136,12 +140,12 @@ public class GuiConfig {
                 this.splashText.synced = splashTextObject.get("synced").getAsBoolean();
             }
             if (splashTextObject.has("texts")) {
-                this.splashText.setSplashTexts(
-                        GuiConfig.getWantedText(this.getStringPlease(splashTextObject.get("texts"))));
+                this.splashText
+                        .setSplashTexts(GuiConfig.getWantedText(this.getStringPlease(splashTextObject.get("texts"))));
             }
             if (splashTextObject.has("file")) {
-                this.splashText.setSplashTexts(
-                        new TextResourceLocation(this.getStringPlease(splashTextObject.get("file"))));
+                this.splashText
+                        .setSplashTexts(new TextResourceLocation(this.getStringPlease(splashTextObject.get("file"))));
             }
         }
         if ((panoramaObject = (JsonObject) other.get("panorama")) != null) {
@@ -157,8 +161,7 @@ public class GuiConfig {
                 this.panorama.setPosition(panoramaObject.get("position").getAsInt());
             }
             if (panoramaObject.has("animationSpeed")) {
-                this.panorama.setAnimationSpeed(
-                        panoramaObject.get("animationSpeed").getAsInt());
+                this.panorama.setAnimationSpeed(panoramaObject.get("animationSpeed").getAsInt());
             }
             if (panoramaObject.has("synced")) {
                 this.panorama.synced = panoramaObject.get("synced").getAsBoolean();
@@ -166,15 +169,15 @@ public class GuiConfig {
         }
         if ((backgroundObject = (JsonObject) other.get("background")) != null) {
             this.background = new Background(
-                    this, GuiConfig.getWantedTexture(this.getStringPlease(backgroundObject.get("image"))));
+                    this,
+                    GuiConfig.getWantedTexture(this.getStringPlease(backgroundObject.get("image"))));
             if (backgroundObject.has("mode")) {
                 this.background.setMode(backgroundObject.get("mode").getAsString());
             }
             if (backgroundObject.has("slideshow")) {
                 JsonObject slideShowObject = backgroundObject.get("slideshow").getAsJsonObject();
                 this.background.ichBinEineSlideshow = true;
-                if (slideShowObject.has("synced")
-                        && slideShowObject.get("synced").getAsBoolean()) {
+                if (slideShowObject.has("synced") && slideShowObject.get("synced").getAsBoolean()) {
                     GuiCustom mainMenu = CustomMainMenu.INSTANCE.config.getGUI("mainmenu");
                     this.background.slideShow = mainMenu.guiConfig.background.slideShow;
                 } else {
@@ -185,15 +188,12 @@ public class GuiConfig {
                     }
                     Slideshow slideShow = new Slideshow(this, images);
                     if (slideShowObject.has("displayDuration")) {
-                        slideShow.displayDuration =
-                                slideShowObject.get("displayDuration").getAsInt();
+                        slideShow.displayDuration = slideShowObject.get("displayDuration").getAsInt();
                     }
                     if (slideShowObject.has("fadeDuration")) {
-                        slideShow.fadeDuration =
-                                slideShowObject.get("fadeDuration").getAsInt();
+                        slideShow.fadeDuration = slideShowObject.get("fadeDuration").getAsInt();
                     }
-                    if (slideShowObject.has("shuffle")
-                            && slideShowObject.get("shuffle").getAsBoolean()) {
+                    if (slideShowObject.has("shuffle") && slideShowObject.get("shuffle").getAsBoolean()) {
                         slideShow.shuffle();
                     }
                     this.background.slideShow = slideShow;
@@ -311,8 +311,7 @@ public class GuiConfig {
             }
             Slideshow slideShow = new Slideshow(this, images);
             if (slideShowObject.has("displayDuration")) {
-                slideShow.displayDuration =
-                        slideShowObject.get("displayDuration").getAsInt();
+                slideShow.displayDuration = slideShowObject.get("displayDuration").getAsInt();
             }
             if (slideShowObject.has("fadeDuration")) {
                 slideShow.fadeDuration = slideShowObject.get("fadeDuration").getAsInt();

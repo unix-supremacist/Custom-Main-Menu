@@ -1,25 +1,30 @@
 package lumien.custommainmenu.handler;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.gui.GuiCustom;
 import lumien.custommainmenu.gui.GuiCustomButton;
 import lumien.custommainmenu.gui.GuiCustomWrappedButton;
 import lumien.custommainmenu.gui.GuiFakeMain;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
+
 import org.apache.logging.log4j.Level;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class CMMEventHandler {
+
     public long displayMs = -1L;
     Field guiField;
     GuiCustom actualGui;
@@ -83,7 +88,8 @@ public class CMMEventHandler {
                 removedButtons.put(b.id, b);
                 if (b.id == 666 && Loader.isModLoaded((String) "OpenEye")) {
                     CustomMainMenu.INSTANCE.logger.log(
-                            Level.DEBUG, "Found OpenEye button, use a wrapped button to config this. (" + b.id + ")");
+                            Level.DEBUG,
+                            "Found OpenEye button, use a wrapped button to config this. (" + b.id + ")");
                     continue;
                 }
                 if (b.id == 404 && Loader.isModLoaded((String) "VersionChecker")) {
@@ -93,14 +99,16 @@ public class CMMEventHandler {
                     continue;
                 }
                 CustomMainMenu.INSTANCE.logger.log(
-                        Level.DEBUG, "Found unsupported button, use a wrapped button to config this. (" + b.id + ")");
+                        Level.DEBUG,
+                        "Found unsupported button, use a wrapped button to config this. (" + b.id + ")");
             }
             for (GuiButton o : this.actualGui.getButtonList()) {
                 if (!(o instanceof GuiCustomWrappedButton)) continue;
                 GuiCustomWrappedButton b = (GuiCustomWrappedButton) o;
                 CustomMainMenu.INSTANCE.logger.log(
                         Level.DEBUG,
-                        "Initiating Wrapped Button " + b.wrappedButtonID + " with "
+                        "Initiating Wrapped Button " + b.wrappedButtonID
+                                + " with "
                                 + removedButtons.get(b.wrappedButtonID));
                 b.init((GuiButton) removedButtons.get(b.wrappedButtonID));
             }
@@ -111,10 +119,11 @@ public class CMMEventHandler {
     public void renderScreenPost(GuiScreenEvent.DrawScreenEvent.Post event) {
         if (this.displayMs != -1L) {
             if (System.currentTimeMillis() - this.displayMs < 5000L) {
-                Minecraft.getMinecraft()
-                        .fontRenderer
-                        .drawStringWithShadow(
-                                "Error loading config file, see console for more information", 0, 80, 16711680);
+                Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(
+                        "Error loading config file, see console for more information",
+                        0,
+                        80,
+                        16711680);
             } else {
                 this.displayMs = -1L;
             }

@@ -1,10 +1,5 @@
 package lumien.custommainmenu.configuration;
 
-import com.google.common.io.ByteStreams;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,11 +8,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.gui.GuiCustom;
+
 import org.apache.commons.io.IOUtils;
 
+import com.google.common.io.ByteStreams;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
+
 public class ConfigurationLoader {
+
     Config config;
 
     public ConfigurationLoader(Config config) {

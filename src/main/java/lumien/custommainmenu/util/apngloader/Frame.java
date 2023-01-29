@@ -1,6 +1,7 @@
 package lumien.custommainmenu.util.apngloader;
 
 public class Frame {
+
     int sequenceNumber;
     int width;
     int height;

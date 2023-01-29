@@ -7,6 +7,7 @@ import lumien.custommainmenu.lib.actions.IAction;
 import lumien.custommainmenu.lib.texts.IText;
 
 public class Text extends Element {
+
     public IText text;
     public IText hoverText;
     public String name;

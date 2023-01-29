@@ -3,10 +3,12 @@ package lumien.custommainmenu.configuration.elements;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import lumien.custommainmenu.configuration.GuiConfig;
 import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Slideshow extends Element {
+
     public ITexture[] ressources;
     public int displayDuration;
     private int counter;
@@ -54,8 +56,7 @@ public class Slideshow extends Element {
 
     public ITexture getCurrentResource2() {
         if (this.fading) {
-            int index = (this.counter + this.fadeDuration)
-                    / (this.displayDuration + this.fadeDuration)
+            int index = (this.counter + this.fadeDuration) / (this.displayDuration + this.fadeDuration)
                     % this.ressources.length;
             return this.ressources[index];
         }

@@ -1,9 +1,11 @@
 package lumien.custommainmenu.configuration;
 
 import lumien.custommainmenu.gui.GuiCustom;
+
 import net.minecraft.client.Minecraft;
 
 public class GuiEntry {
+
     GuiCustom standard;
     GuiCustom auto;
     GuiCustom small;

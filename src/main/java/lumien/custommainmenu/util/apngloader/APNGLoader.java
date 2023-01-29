@@ -1,7 +1,5 @@
 package lumien.custommainmenu.util.apngloader;
 
-import com.google.common.primitives.Ints;
-import com.google.common.primitives.Shorts;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -11,11 +9,16 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
+
 import org.apache.commons.lang3.tuple.Triple;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.primitives.Ints;
+import com.google.common.primitives.Shorts;
+
 public class APNGLoader {
+
     public static APNGImage load(File toLoad) throws IOException {
         byte[] length;
         int success;
@@ -48,10 +51,10 @@ public class APNGLoader {
             byte[] crc = new byte[4];
             inputStream.read(crc);
             if (typeString.equals("IHDR")) {
-                int width = Ints.fromBytes(
-                        (byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]);
-                int height = Ints.fromBytes(
-                        (byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]);
+                int width = Ints
+                        .fromBytes((byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]);
+                int height = Ints
+                        .fromBytes((byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]);
                 byte bitDepth = chunkData[8];
                 byte colorType = chunkData[9];
                 byte compression = chunkData[10];
@@ -90,17 +93,25 @@ public class APNGLoader {
                 continue;
             }
             if (typeString.equals("acTL")) {
-                loadedImage.setNumberOfFrames(Ints.fromBytes(
-                        (byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]));
-                loadedImage.setNumberOfLoops(Ints.fromBytes(
-                        (byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]));
+                loadedImage.setNumberOfFrames(
+                        Ints.fromBytes(
+                                (byte) chunkData[0],
+                                (byte) chunkData[1],
+                                (byte) chunkData[2],
+                                (byte) chunkData[3]));
+                loadedImage.setNumberOfLoops(
+                        Ints.fromBytes(
+                                (byte) chunkData[4],
+                                (byte) chunkData[5],
+                                (byte) chunkData[6],
+                                (byte) chunkData[7]));
                 System.out.println("Frames : " + loadedImage.numberOfFrames);
                 continue;
             }
             if (typeString.equals("fcTL")) {
                 if (currentFrame != null) {
-                    currentFrame.textureID =
-                            APNGLoader.loadImageData(loadedImage, currentFrame, currentImageData.toByteArray());
+                    currentFrame.textureID = APNGLoader
+                            .loadImageData(loadedImage, currentFrame, currentImageData.toByteArray());
                     frames.add(currentFrame);
                 }
                 currentImageData = new ByteArrayOutputStream();
@@ -131,10 +142,10 @@ public class APNGLoader {
                         (byte) ((byte) byteStream.read()),
                         (byte) ((byte) byteStream.read()),
                         (byte) ((byte) byteStream.read()));
-                currentFrame.delayNum =
-                        Shorts.fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
-                currentFrame.delayDen =
-                        Shorts.fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
+                currentFrame.delayNum = Shorts
+                        .fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
+                currentFrame.delayDen = Shorts
+                        .fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
                 currentFrame.disposeOP = byteStream.read();
                 currentFrame.blendOP = byteStream.read();
                 System.out.println("New Frame: " + currentFrame.sequenceNumber);
@@ -154,8 +165,8 @@ public class APNGLoader {
             currentImageData.write(data);
         }
         if (currentFrame != null) {
-            currentFrame.textureID =
-                    APNGLoader.loadImageData(loadedImage, currentFrame, currentImageData.toByteArray());
+            currentFrame.textureID = APNGLoader
+                    .loadImageData(loadedImage, currentFrame, currentImageData.toByteArray());
             frames.add(currentFrame);
         }
         System.out.println(loadedImage.frames.length + ":" + frames.size());
@@ -200,8 +211,7 @@ public class APNGLoader {
         }
         for (int line = 0; line < inflated.length; ++line) {
             byte filter = inflated[line][0];
-            block16:
-            for (int t = 1; t < inflated[line].length; ++t) {
+            block16: for (int t = 1; t < inflated[line].length; ++t) {
                 int data = inflated[line][t] & 0xFF;
                 int a = 0;
                 if (t > samples * pngImage.bitDepth / 8) {
@@ -322,8 +332,7 @@ public class APNGLoader {
         byte[] magic = new byte[8];
         inputStream.read(magic);
         boolean isPNG = true;
-        block10:
-        for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
+        block10: for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
             byte b = magic[byteIndex];
             switch (byteIndex) {
                 case 0: {

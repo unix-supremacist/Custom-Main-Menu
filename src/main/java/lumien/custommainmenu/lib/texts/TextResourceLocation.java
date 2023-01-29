@@ -3,11 +3,13 @@ package lumien.custommainmenu.lib.texts;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.util.ResourceLocation;
 
 public class TextResourceLocation implements IText {
+
     String string;
     ResourceLocation resourceLocation;
 

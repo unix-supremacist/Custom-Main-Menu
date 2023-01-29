@@ -5,6 +5,7 @@ import lumien.custommainmenu.configuration.GuiConfig;
 import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Image extends Element {
+
     public int posX;
     public int posY;
     public int width;

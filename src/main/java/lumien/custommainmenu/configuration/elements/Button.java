@@ -7,6 +7,7 @@ import lumien.custommainmenu.lib.texts.IText;
 import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Button extends Element {
+
     public String name;
     public IText text;
     public IText hoverText;

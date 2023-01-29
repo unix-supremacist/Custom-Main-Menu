@@ -5,16 +5,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.handler.LoadTextureURL;
 import lumien.custommainmenu.util.GlStateManager;
+
 import net.minecraft.client.renderer.texture.TextureUtil;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
 
 public class TextureURL implements ITexture {
+
     URL url;
     int textureID = -1;
     private BufferedImage bi;
@@ -47,7 +52,10 @@ public class TextureURL implements ITexture {
         }
         if (bi != null) {
             this.textureID = TextureUtil.uploadTextureImageAllocate(
-                    (int) GL11.glGenTextures(), (BufferedImage) bi, (boolean) false, (boolean) false);
+                    (int) GL11.glGenTextures(),
+                    (BufferedImage) bi,
+                    (boolean) false,
+                    (boolean) false);
         }
     }
 
@@ -57,8 +65,12 @@ public class TextureURL implements ITexture {
             GlStateManager.bindTexture(this.textureID);
         } else {
             if (this.bi != null) {
-                this.setTextureID(TextureUtil.uploadTextureImageAllocate(
-                        (int) GL11.glGenTextures(), (BufferedImage) this.bi, (boolean) false, (boolean) false));
+                this.setTextureID(
+                        TextureUtil.uploadTextureImageAllocate(
+                                (int) GL11.glGenTextures(),
+                                (BufferedImage) this.bi,
+                                (boolean) false,
+                                (boolean) false));
                 this.bind();
                 return;
             }

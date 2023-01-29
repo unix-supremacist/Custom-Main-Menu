@@ -1,10 +1,12 @@
 package lumien.custommainmenu.configuration.elements;
 
 import java.util.Locale;
+
 import lumien.custommainmenu.configuration.GuiConfig;
 import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Background extends Element {
+
     public ITexture image;
     public MODE mode;
     public boolean ichBinEineSlideshow;

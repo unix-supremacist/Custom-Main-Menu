@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import org.lwjgl.opengl.GL11;
 
 public class APNGImage {
+
     int width;
     int height;
     int bitDepth;
@@ -27,8 +28,9 @@ public class APNGImage {
     }
 
     public void bindTexture() {
-        GL11.glBindTexture((int) 3553, (int)
-                this.frames[(int) (System.currentTimeMillis() / 100L % (long) this.frames.length)].textureID);
+        GL11.glBindTexture(
+                (int) 3553,
+                (int) this.frames[(int) (System.currentTimeMillis() / 100L % (long) this.frames.length)].textureID);
     }
 
     public int getBitDepth() {

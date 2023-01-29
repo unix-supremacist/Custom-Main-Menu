@@ -3,6 +3,7 @@ package lumien.custommainmenu.util;
 import org.lwjgl.opengl.GL11;
 
 public class RenderUtil {
+
     public static void drawCompleteImage(int posX, int posY, int width, int height) {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) posX, (float) posY, (float) 0.0f);
@@ -19,15 +20,8 @@ public class RenderUtil {
         GL11.glPopMatrix();
     }
 
-    public static void drawPartialImage(
-            int posX,
-            int posY,
-            int imageX,
-            int imageY,
-            int width,
-            int height,
-            int imagePartWidth,
-            int imagePartHeight) {
+    public static void drawPartialImage(int posX, int posY, int imageX, int imageY, int width, int height,
+            int imagePartWidth, int imagePartHeight) {
         double imageWidth = GL11.glGetTexLevelParameteri((int) 3553, (int) 0, (int) 4096);
         double imageHeight = GL11.glGetTexLevelParameteri((int) 3553, (int) 0, (int) 4097);
         double einsTeilerWidth = 1.0 / imageWidth;

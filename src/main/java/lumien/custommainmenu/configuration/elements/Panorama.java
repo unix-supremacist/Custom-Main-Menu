@@ -4,6 +4,7 @@ import lumien.custommainmenu.configuration.GuiConfig;
 import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Panorama extends Element {
+
     String images;
     public ITexture[] locations;
     public boolean blur;

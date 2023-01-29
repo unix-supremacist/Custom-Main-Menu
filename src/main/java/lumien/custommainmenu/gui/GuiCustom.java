@@ -1,14 +1,12 @@
 package lumien.custommainmenu.gui;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.configuration.Alignment;
 import lumien.custommainmenu.configuration.Config;
@@ -23,6 +21,7 @@ import lumien.custommainmenu.lib.actions.ActionOpenLink;
 import lumien.custommainmenu.lib.textures.ITexture;
 import lumien.custommainmenu.util.GlStateManager;
 import lumien.custommainmenu.util.RenderUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -36,12 +35,18 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Project;
 
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 @SideOnly(value = Side.CLIENT)
 public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
+
     public static Config config;
     int buttonCounter;
     int panoramaTimer;
@@ -116,16 +121,16 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
         int idCounter = 6000;
         for (Button b : this.guiConfig.customButtons) {
             if (b.wrappedButtonID != -1) {
-                this.buttonList.add(
-                        this.alignButton(b, new GuiCustomWrappedButton(b.wrappedButtonID, b.wrappedButtonID, b)));
+                this.buttonList
+                        .add(this.alignButton(b, new GuiCustomWrappedButton(b.wrappedButtonID, b.wrappedButtonID, b)));
                 continue;
             }
             this.buttonList.add(this.alignButton(b, new GuiCustomButton(idCounter, b)));
             ++idCounter;
         }
         for (Text t : this.guiConfig.customTexts) {
-            this.textLabels.add(
-                    new GuiCustomLabel(this, t, this.modX(t.posX, t.alignment), this.modY(t.posY, t.alignment)));
+            this.textLabels
+                    .add(new GuiCustomLabel(this, t, this.modX(t.posX, t.alignment), this.modY(t.posY, t.alignment)));
         }
     }
 
@@ -238,8 +243,7 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
                 GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
                 continue;
             }
-            if (i.hoverImage != null
-                    && mouseX >= posX
+            if (i.hoverImage != null && mouseX >= posX
                     && mouseX <= posX + i.width
                     && mouseY >= posY
                     && mouseY <= posY + i.height) {
@@ -259,9 +263,9 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
                     this.modY(splashText.posY, splashText.alignment),
                     0.0f);
             GlStateManager.rotate(-20.0f, 0.0f, 0.0f, 1.0f);
-            float f1 = 1.8f
-                    - MathHelper.abs((float) (MathHelper.sin(
-                                    (float) ((float) (Minecraft.getSystemTime() % 1000L) / 1000.0f * 3.1415927f * 2.0f))
+            float f1 = 1.8f - MathHelper.abs(
+                    (float) (MathHelper
+                            .sin((float) ((float) (Minecraft.getSystemTime() % 1000L) / 1000.0f * 3.1415927f * 2.0f))
                             * 0.1f));
             f1 = f1 * 100.0f / (float) (this.fontRenderer.getStringWidth(this.splashText) + 32);
             GlStateManager.scale(f1, f1, f1);
@@ -349,12 +353,16 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
         worldrenderer.setColorRGBA_F(1.0f, 1.0f, 1.0f, 1.0f);
         int k = this.width;
         int l = this.height;
+        worldrenderer
+                .addVertexWithUV(0.0, (double) l, (double) this.zLevel, (double) (0.5f - f2), (double) (0.5f + f3));
         worldrenderer.addVertexWithUV(
-                0.0, (double) l, (double) this.zLevel, (double) (0.5f - f2), (double) (0.5f + f3));
-        worldrenderer.addVertexWithUV(
-                (double) k, (double) l, (double) this.zLevel, (double) (0.5f - f2), (double) (0.5f - f3));
-        worldrenderer.addVertexWithUV(
-                (double) k, 0.0, (double) this.zLevel, (double) (0.5f + f2), (double) (0.5f - f3));
+                (double) k,
+                (double) l,
+                (double) this.zLevel,
+                (double) (0.5f - f2),
+                (double) (0.5f - f3));
+        worldrenderer
+                .addVertexWithUV((double) k, 0.0, (double) this.zLevel, (double) (0.5f + f2), (double) (0.5f - f3));
         worldrenderer.addVertexWithUV(0.0, 0.0, (double) this.zLevel, (double) (0.5f + f2), (double) (0.5f + f3));
         worldrenderer.draw();
     }
@@ -508,14 +516,19 @@ public class GuiCustom extends GuiScreen implements GuiYesNoCallback {
             GuiCustomWrappedButton wrapped = (GuiCustomWrappedButton) button;
             if (wrapped.wrappedButton != null) {
                 GuiScreenEvent.ActionPerformedEvent.Pre event = new GuiScreenEvent.ActionPerformedEvent.Pre(
-                        (GuiScreen) new GuiFakeMain(), wrapped.wrappedButton, new ArrayList());
+                        (GuiScreen) new GuiFakeMain(),
+                        wrapped.wrappedButton,
+                        new ArrayList());
                 if (MinecraftForge.EVENT_BUS.post((Event) event)) {
                     return;
                 }
                 event.button.func_146113_a(this.mc.getSoundHandler());
                 if (((Object) ((Object) this)).equals((Object) this.mc.currentScreen)) {
-                    MinecraftForge.EVENT_BUS.post((Event) new GuiScreenEvent.ActionPerformedEvent.Post(
-                            (GuiScreen) new GuiFakeMain(), wrapped.wrappedButton, new ArrayList()));
+                    MinecraftForge.EVENT_BUS.post(
+                            (Event) new GuiScreenEvent.ActionPerformedEvent.Post(
+                                    (GuiScreen) new GuiFakeMain(),
+                                    wrapped.wrappedButton,
+                                    new ArrayList()));
                 }
             }
         } else if (button.id >= 6000 && button instanceof GuiCustomButton) {

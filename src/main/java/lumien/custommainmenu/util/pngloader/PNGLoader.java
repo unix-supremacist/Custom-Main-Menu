@@ -1,6 +1,5 @@
 package lumien.custommainmenu.util.pngloader;
 
-import com.google.common.primitives.Ints;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,11 +7,15 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
+
 import org.apache.commons.lang3.tuple.Triple;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.primitives.Ints;
+
 public class PNGLoader {
+
     public static PNGImage load(File toLoad) throws IOException {
         int success;
         byte[] length;
@@ -42,10 +45,10 @@ public class PNGLoader {
             byte[] crc = new byte[4];
             inputStream.read(crc);
             if (typeString.equals("IHDR")) {
-                int width = Ints.fromBytes(
-                        (byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]);
-                int height = Ints.fromBytes(
-                        (byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]);
+                int width = Ints
+                        .fromBytes((byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]);
+                int height = Ints
+                        .fromBytes((byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]);
                 byte bitDepth = chunkData[8];
                 byte colorType = chunkData[9];
                 byte compression = chunkData[10];
@@ -123,8 +126,7 @@ public class PNGLoader {
         }
         for (int line = 0; line < inflated.length; ++line) {
             byte filter = inflated[line][0];
-            block16:
-            for (int t = 1; t < inflated[line].length; ++t) {
+            block16: for (int t = 1; t < inflated[line].length; ++t) {
                 int data = inflated[line][t] & 0xFF;
                 int a = 0;
                 if (t > samples * pngImage.bitDepth / 8) {
@@ -226,11 +228,14 @@ public class PNGLoader {
                 samples = 4;
             }
         }
-        uncompressedImageData =
-                new byte[pngImage.width * pngImage.height * samples * pngImage.bitDepth / 8 + pngImage.height];
+        uncompressedImageData = new byte[pngImage.width * pngImage.height * samples * pngImage.bitDepth / 8
+                + pngImage.height];
         try {
-            System.out.println("Decompressed " + inflater.inflate(uncompressedImageData) + " from "
-                    + uncompressedImageData.length + " bytes");
+            System.out.println(
+                    "Decompressed " + inflater.inflate(uncompressedImageData)
+                            + " from "
+                            + uncompressedImageData.length
+                            + " bytes");
         } catch (DataFormatException e) {
             e.printStackTrace();
         }
@@ -238,11 +243,10 @@ public class PNGLoader {
         if (pngImage.getColorType() == 6) {
             colorAmount = 4;
         }
-        ByteBuffer byteBuffer = BufferUtils.createByteBuffer(
-                (int) (pngImage.width * pngImage.height * colorAmount * pngImage.bitDepth / 8));
+        ByteBuffer byteBuffer = BufferUtils
+                .createByteBuffer((int) (pngImage.width * pngImage.height * colorAmount * pngImage.bitDepth / 8));
         System.out.println("Samples: " + samples);
-        block12:
-        for (int scanLine = 0; scanLine < pngImage.height; ++scanLine) {
+        block12: for (int scanLine = 0; scanLine < pngImage.height; ++scanLine) {
             switch (pngImage.getColorType()) {
                 case 2: {
                     int bytesPerScanLine = pngImage.width * samples * pngImage.bitDepth / 8 + 1;
@@ -307,8 +311,7 @@ public class PNGLoader {
         byte[] magic = new byte[8];
         inputStream.read(magic);
         boolean isPNG = true;
-        block10:
-        for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
+        block10: for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
             byte b = magic[byteIndex];
             switch (byteIndex) {
                 case 0: {

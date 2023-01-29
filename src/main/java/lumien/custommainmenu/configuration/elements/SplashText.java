@@ -6,6 +6,7 @@ import lumien.custommainmenu.lib.texts.IText;
 import lumien.custommainmenu.lib.texts.TextResourceLocation;
 
 public class SplashText extends Element {
+
     public IText texts;
     public int posX;
     public int posY;

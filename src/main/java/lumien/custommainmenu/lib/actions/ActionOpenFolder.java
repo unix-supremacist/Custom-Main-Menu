@@ -3,10 +3,13 @@ package lumien.custommainmenu.lib.actions;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+
 import lumien.custommainmenu.gui.GuiCustom;
+
 import net.minecraft.client.Minecraft;
 
 public class ActionOpenFolder implements IAction {
+
     String folderName;
 
     public ActionOpenFolder(String folderName) {
@@ -20,9 +23,8 @@ public class ActionOpenFolder implements IAction {
         try {
             File parentFile = toOpen.getCanonicalFile();
             while ((parentFile = parentFile.getParentFile()) != null) {
-                if (!parentFile
-                        .getCanonicalPath()
-                        .equals(Minecraft.getMinecraft().mcDataDir.getCanonicalPath())) continue;
+                if (!parentFile.getCanonicalPath().equals(Minecraft.getMinecraft().mcDataDir.getCanonicalPath()))
+                    continue;
                 isInMinecraftFolder = true;
             }
             if (isInMinecraftFolder && toOpen.isDirectory() && Desktop.isDesktopSupported()) {

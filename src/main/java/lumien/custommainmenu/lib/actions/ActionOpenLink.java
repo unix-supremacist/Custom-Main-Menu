@@ -2,10 +2,12 @@ package lumien.custommainmenu.lib.actions;
 
 import lumien.custommainmenu.gui.GuiCustom;
 import lumien.custommainmenu.gui.GuiCustomConfirmOpenLink;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
 public class ActionOpenLink implements IAction {
+
     String link;
 
     public ActionOpenLink(String link) {

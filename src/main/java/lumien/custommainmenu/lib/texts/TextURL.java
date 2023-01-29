@@ -2,9 +2,11 @@ package lumien.custommainmenu.lib.texts;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import lumien.custommainmenu.handler.LoadStringURL;
 
 public class TextURL implements IText {
+
     URL url;
     public String string;
 
