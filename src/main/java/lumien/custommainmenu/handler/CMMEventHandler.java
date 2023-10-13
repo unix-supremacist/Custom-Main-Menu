@@ -5,12 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import lumien.custommainmenu.CustomMainMenu;
-import lumien.custommainmenu.gui.GuiCustom;
-import lumien.custommainmenu.gui.GuiCustomButton;
-import lumien.custommainmenu.gui.GuiCustomWrappedButton;
-import lumien.custommainmenu.gui.GuiFakeMain;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMainMenu;
@@ -22,6 +16,11 @@ import org.apache.logging.log4j.Level;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import lumien.custommainmenu.CustomMainMenu;
+import lumien.custommainmenu.gui.GuiCustom;
+import lumien.custommainmenu.gui.GuiCustomButton;
+import lumien.custommainmenu.gui.GuiCustomWrappedButton;
+import lumien.custommainmenu.gui.GuiFakeMain;
 
 public class CMMEventHandler {
 

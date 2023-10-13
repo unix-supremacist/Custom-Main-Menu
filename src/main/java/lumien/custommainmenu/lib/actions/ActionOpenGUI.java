@@ -1,8 +1,5 @@
 package lumien.custommainmenu.lib.actions;
 
-import lumien.custommainmenu.CustomMainMenu;
-import lumien.custommainmenu.gui.GuiCustom;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiCreateWorld;
@@ -22,6 +19,8 @@ import net.minecraft.client.gui.stream.GuiStreamUnavailable;
 import net.minecraft.client.stream.IStream;
 
 import cpw.mods.fml.client.GuiModList;
+import lumien.custommainmenu.CustomMainMenu;
+import lumien.custommainmenu.gui.GuiCustom;
 
 public class ActionOpenGUI implements IAction {
 

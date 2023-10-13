@@ -8,15 +8,15 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import lumien.custommainmenu.CustomMainMenu;
-import lumien.custommainmenu.handler.LoadTextureURL;
-import lumien.custommainmenu.util.GlStateManager;
-
 import net.minecraft.client.renderer.texture.TextureUtil;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
+
+import lumien.custommainmenu.CustomMainMenu;
+import lumien.custommainmenu.handler.LoadTextureURL;
+import lumien.custommainmenu.util.GlStateManager;
 
 public class TextureURL implements ITexture {
 

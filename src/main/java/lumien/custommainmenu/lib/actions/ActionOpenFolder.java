@@ -4,9 +4,9 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
-import lumien.custommainmenu.gui.GuiCustom;
-
 import net.minecraft.client.Minecraft;
+
+import lumien.custommainmenu.gui.GuiCustom;
 
 public class ActionOpenFolder implements IAction {
 

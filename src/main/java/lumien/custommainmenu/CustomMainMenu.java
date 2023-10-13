@@ -2,10 +2,6 @@ package lumien.custommainmenu;
 
 import java.io.File;
 
-import lumien.custommainmenu.configuration.Config;
-import lumien.custommainmenu.configuration.ConfigurationLoader;
-import lumien.custommainmenu.handler.CMMEventHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -19,6 +15,9 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import lumien.custommainmenu.configuration.Config;
+import lumien.custommainmenu.configuration.ConfigurationLoader;
+import lumien.custommainmenu.handler.CMMEventHandler;
 
 @Mod(modid = CustomMainMenu.MOD_ID, name = CustomMainMenu.MOD_NAME, version = CustomMainMenu.MOD_VERSION)
 public class CustomMainMenu {
