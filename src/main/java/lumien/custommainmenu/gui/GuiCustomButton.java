@@ -2,13 +2,6 @@ package lumien.custommainmenu.gui;
 
 import java.util.List;
 
-import lumien.custommainmenu.configuration.elements.Button;
-import lumien.custommainmenu.lib.StringReplacer;
-import lumien.custommainmenu.lib.textures.ITexture;
-import lumien.custommainmenu.util.GlStateManager;
-import lumien.custommainmenu.util.LogicUtil;
-import lumien.custommainmenu.util.RenderUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -17,6 +10,13 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+
+import lumien.custommainmenu.configuration.elements.Button;
+import lumien.custommainmenu.lib.StringReplacer;
+import lumien.custommainmenu.lib.textures.ITexture;
+import lumien.custommainmenu.util.GlStateManager;
+import lumien.custommainmenu.util.LogicUtil;
+import lumien.custommainmenu.util.RenderUtil;
 
 public class GuiCustomButton extends GuiButton {
 

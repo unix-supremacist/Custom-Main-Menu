@@ -1,12 +1,12 @@
 package lumien.custommainmenu.lib.actions;
 
-import lumien.custommainmenu.CustomMainMenu;
-import lumien.custommainmenu.gui.GuiCustom;
-
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 
 import org.lwjgl.input.Keyboard;
+
+import lumien.custommainmenu.CustomMainMenu;
+import lumien.custommainmenu.gui.GuiCustom;
 
 public class ActionRefresh implements IAction {
 

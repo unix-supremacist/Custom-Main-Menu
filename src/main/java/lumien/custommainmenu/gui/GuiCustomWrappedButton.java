@@ -1,9 +1,9 @@
 package lumien.custommainmenu.gui;
 
-import lumien.custommainmenu.configuration.elements.Button;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+
+import lumien.custommainmenu.configuration.elements.Button;
 
 public class GuiCustomWrappedButton extends GuiCustomButton {
 

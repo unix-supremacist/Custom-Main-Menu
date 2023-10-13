@@ -1,8 +1,8 @@
 package lumien.custommainmenu.configuration;
 
-import lumien.custommainmenu.gui.GuiCustom;
-
 import net.minecraft.client.Minecraft;
+
+import lumien.custommainmenu.gui.GuiCustom;
 
 public class GuiEntry {
 

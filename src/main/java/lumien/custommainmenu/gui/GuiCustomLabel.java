@@ -4,11 +4,6 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import lumien.custommainmenu.configuration.elements.Text;
-import lumien.custommainmenu.lib.StringReplacer;
-import lumien.custommainmenu.lib.texts.TextString;
-import lumien.custommainmenu.util.GlStateManager;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -21,6 +16,10 @@ import com.google.common.base.Strings;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
+import lumien.custommainmenu.configuration.elements.Text;
+import lumien.custommainmenu.lib.StringReplacer;
+import lumien.custommainmenu.lib.texts.TextString;
+import lumien.custommainmenu.util.GlStateManager;
 
 public class GuiCustomLabel extends Gui {
 

@@ -7,21 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import lumien.custommainmenu.CustomMainMenu;
-import lumien.custommainmenu.configuration.Alignment;
-import lumien.custommainmenu.configuration.Config;
-import lumien.custommainmenu.configuration.GuiConfig;
-import lumien.custommainmenu.configuration.elements.Background;
-import lumien.custommainmenu.configuration.elements.Button;
-import lumien.custommainmenu.configuration.elements.Image;
-import lumien.custommainmenu.configuration.elements.Panorama;
-import lumien.custommainmenu.configuration.elements.SplashText;
-import lumien.custommainmenu.configuration.elements.Text;
-import lumien.custommainmenu.lib.actions.ActionOpenLink;
-import lumien.custommainmenu.lib.textures.ITexture;
-import lumien.custommainmenu.util.GlStateManager;
-import lumien.custommainmenu.util.RenderUtil;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -43,6 +28,20 @@ import org.lwjgl.util.glu.Project;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import lumien.custommainmenu.CustomMainMenu;
+import lumien.custommainmenu.configuration.Alignment;
+import lumien.custommainmenu.configuration.Config;
+import lumien.custommainmenu.configuration.GuiConfig;
+import lumien.custommainmenu.configuration.elements.Background;
+import lumien.custommainmenu.configuration.elements.Button;
+import lumien.custommainmenu.configuration.elements.Image;
+import lumien.custommainmenu.configuration.elements.Panorama;
+import lumien.custommainmenu.configuration.elements.SplashText;
+import lumien.custommainmenu.configuration.elements.Text;
+import lumien.custommainmenu.lib.actions.ActionOpenLink;
+import lumien.custommainmenu.lib.textures.ITexture;
+import lumien.custommainmenu.util.GlStateManager;
+import lumien.custommainmenu.util.RenderUtil;
 
 @SideOnly(value = Side.CLIENT)
 public class GuiCustom extends GuiScreen implements GuiYesNoCallback {

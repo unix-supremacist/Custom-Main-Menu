@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import lumien.custommainmenu.gui.GuiCustom;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -16,6 +14,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.GuiOldSaveLoadConfirm;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.StartupQuery;
+import lumien.custommainmenu.gui.GuiCustom;
 
 public class ActionLoadWorld implements IAction {
 

@@ -6,6 +6,12 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import org.apache.logging.log4j.Level;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.configuration.elements.Background;
 import lumien.custommainmenu.configuration.elements.Button;
@@ -30,12 +36,6 @@ import lumien.custommainmenu.lib.texts.TextURL;
 import lumien.custommainmenu.lib.textures.ITexture;
 import lumien.custommainmenu.lib.textures.TextureResourceLocation;
 import lumien.custommainmenu.lib.textures.TextureURL;
-
-import org.apache.logging.log4j.Level;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 public class GuiConfig {
 
