@@ -67,9 +67,9 @@ public class GuiConfig {
         }
         this.name = name;
         this.loadAlignments(jsonObject);
-        this.customTexts = new ArrayList();
-        this.customImages = new ArrayList();
-        this.customButtons = new ArrayList();
+        this.customTexts = new ArrayList<>();
+        this.customImages = new ArrayList<>();
+        this.customButtons = new ArrayList<>();
         this.splashText = null;
         this.panorama = null;
         this.background = null;
@@ -80,7 +80,7 @@ public class GuiConfig {
     }
 
     private void loadAlignments(JsonObject jsonObject) {
-        this.alignments = new HashMap();
+        this.alignments = new HashMap<>();
         this.alignments.put("bottom_left", new Alignment(0.0f, 1.0f));
         this.alignments.put("top_left", new Alignment(0.0f, 0.0f));
         this.alignments.put("top_right", new Alignment(1.0f, 0.0f));
@@ -94,8 +94,8 @@ public class GuiConfig {
         if (jsonObject.has("alignments")) {
             JsonObject alignmentObject = (JsonObject) jsonObject.get("alignments");
             Set<Map.Entry<String, JsonElement>> buttons = alignmentObject.entrySet();
-            for (Map.Entry entry : buttons) {
-                String name = (String) entry.getKey();
+            for (Map.Entry<String, JsonElement> entry : buttons) {
+                String name = entry.getKey();
                 JsonObject object = (JsonObject) entry.getValue();
                 Alignment a = new Alignment(
                         object.get("factorWidth").getAsFloat(),
@@ -205,9 +205,9 @@ public class GuiConfig {
     private void loadImages(JsonObject jsonObject) {
         JsonObject textElements = jsonObject.get("images").getAsJsonObject();
         Set<Map.Entry<String, JsonElement>> images = textElements.entrySet();
-        for (Map.Entry entry : images) {
-            String name = (String) entry.getKey();
-            JsonElement element = (JsonElement) entry.getValue();
+        for (Map.Entry<String, JsonElement> entry : images) {
+            String name = entry.getKey();
+            JsonElement element = entry.getValue();
             this.customImages.add(this.getImage((JsonObject) element));
         }
     }
@@ -215,9 +215,9 @@ public class GuiConfig {
     private void loadTexts(JsonObject jsonObject) {
         JsonObject textElements = jsonObject.get("texts").getAsJsonObject();
         Set<Map.Entry<String, JsonElement>> texts = textElements.entrySet();
-        for (Map.Entry entry : texts) {
-            String name = (String) entry.getKey();
-            JsonElement element = (JsonElement) entry.getValue();
+        for (Map.Entry<String, JsonElement> entry : texts) {
+            String name = entry.getKey();
+            JsonElement element = entry.getValue();
             this.customTexts.add(this.getText(name, (JsonObject) element));
         }
     }
@@ -225,11 +225,11 @@ public class GuiConfig {
     private void loadButtons(JsonObject jsonObject) {
         JsonObject buttonElements = jsonObject.get("buttons").getAsJsonObject();
         Set<Map.Entry<String, JsonElement>> buttons = buttonElements.entrySet();
-        for (Map.Entry entry : buttons) {
-            String name = (String) entry.getKey();
+        for (Map.Entry<String, JsonElement> entry : buttons) {
+            String name = entry.getKey();
             JsonObject object = (JsonObject) entry.getValue();
             Button b = this.getButton(object);
-            b.name = (String) entry.getKey();
+            b.name = entry.getKey();
             this.customButtons.add(b);
         }
     }
@@ -370,13 +370,13 @@ public class GuiConfig {
             JsonArray array = jsonElement.getAsJsonArray();
             return array.get(rng.nextInt(array.size())).getAsString();
         }
-        CustomMainMenu.INSTANCE.logger.log(Level.ERROR, "Error getting random value out of " + jsonElement.toString());
+        CustomMainMenu.INSTANCE.logger.log(Level.ERROR, "Error getting random value out of " + jsonElement);
         return "ERROR";
     }
 
     public static ITexture getWantedTexture(String textureString) {
         if (textureString.startsWith("web:")) {
-            String url = textureString.substring(4, textureString.length());
+            String url = textureString.substring(4);
             return new TextureURL(url);
         }
         return new TextureResourceLocation(textureString);
@@ -419,11 +419,11 @@ public class GuiConfig {
 
     public static IText getWantedText(String textString) {
         if (textString.startsWith("web:")) {
-            String url = textString.substring(4, textString.length());
+            String url = textString.substring(4);
             return new TextURL(url);
         }
         if (textString.startsWith("file:")) {
-            String resource = textString.substring(5, textString.length());
+            String resource = textString.substring(5);
             return new TextResourceLocation(resource);
         }
         return new TextString(textString);

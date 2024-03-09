@@ -3,7 +3,6 @@ package lumien.custommainmenu.gui;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -20,13 +19,13 @@ import lumien.custommainmenu.util.GlStateManager;
 
 public class GuiCustomLabel extends Gui {
 
-    Text text;
-    int posX;
-    int posY;
-    FontRenderer fontRendererObj;
-    int width;
-    int height;
-    GuiCustom parent;
+    final Text text;
+    final int posX;
+    final int posY;
+    final FontRenderer fontRendererObj;
+    final int width;
+    final int height;
+    final GuiCustom parent;
     boolean hovered;
 
     public GuiCustomLabel(GuiCustom customGUI, Text text, int posX, int posY) {
@@ -42,14 +41,14 @@ public class GuiCustomLabel extends Gui {
         this.width = this.fontRendererObj.getStringWidth(text.text.get());
         this.height = this.fontRendererObj.FONT_HEIGHT;
         if (text.name.equals("fml")) {
-            String string = "";
-            List brandings = FMLCommonHandler.instance().getBrandings(true);
+            StringBuilder string = new StringBuilder();
+            List<String> brandings = FMLCommonHandler.instance().getBrandings(true);
             for (int i = 0; i < brandings.size(); ++i) {
-                String brd = (String) brandings.get(i);
-                if (Strings.isNullOrEmpty((String) brd)) continue;
-                string = string + brd + (i < brandings.size() - 1 ? "\n" : "");
+                String brd = brandings.get(i);
+                if (Strings.isNullOrEmpty(brd)) continue;
+                string.append(brd).append(i < brandings.size() - 1 ? "\n" : "");
             }
-            this.text.text = this.text.hoverText = new TextString(string);
+            this.text.text = this.text.hoverText = new TextString(string.toString());
         }
     }
 
@@ -62,10 +61,8 @@ public class GuiCustomLabel extends Gui {
         String toDraw = this.getDrawString();
         boolean newHovered = this.isMouseAboveLabel(mouseX, mouseY);
         if (newHovered && !this.hovered && this.text.hoverSound != null) {
-            Minecraft.getMinecraft().getSoundHandler().playSound(
-                    (ISound) PositionedSoundRecord.func_147674_a(
-                            (ResourceLocation) new ResourceLocation(this.text.hoverSound),
-                            (float) 1.0f));
+            Minecraft.getMinecraft().getSoundHandler()
+                    .playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation(this.text.hoverSound), 1.0f));
         }
         this.hovered = newHovered;
         if (toDraw.contains("\n")) {
@@ -126,14 +123,10 @@ public class GuiCustomLabel extends Gui {
         if (flag && this.text.action != null) {
             if (this.text.pressSound != null) {
                 Minecraft.getMinecraft().getSoundHandler().playSound(
-                        (ISound) PositionedSoundRecord.func_147674_a(
-                                (ResourceLocation) new ResourceLocation(this.text.pressSound),
-                                (float) 1.0f));
+                        PositionedSoundRecord.func_147674_a(new ResourceLocation(this.text.pressSound), 1.0f));
             } else {
-                Minecraft.getMinecraft().getSoundHandler().playSound(
-                        (ISound) PositionedSoundRecord.func_147674_a(
-                                (ResourceLocation) new ResourceLocation("gui.button.press"),
-                                (float) 1.0f));
+                Minecraft.getMinecraft().getSoundHandler()
+                        .playSound(PositionedSoundRecord.func_147674_a(new ResourceLocation("gui.button.press"), 1.0f));
             }
             this.text.action.perform(this.text, this.parent);
         }

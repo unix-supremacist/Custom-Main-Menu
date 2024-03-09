@@ -13,14 +13,14 @@ public class PNGImage {
     int filter;
     int textureID;
     int interlace;
-    Triple[] palette;
+    Triple<Integer, Integer, Integer>[] palette;
 
-    public void setPalette(Triple[] palette) {
+    public void setPalette(Triple<Integer, Integer, Integer>[] palette) {
         this.palette = palette;
     }
 
     public void bindTexture() {
-        GL11.glBindTexture((int) 3553, (int) this.textureID);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.textureID);
     }
 
     public int getBitDepth() {
@@ -83,7 +83,7 @@ public class PNGImage {
         this.interlace = interlace;
     }
 
-    public Triple[] getPalette() {
+    public Triple<Integer, Integer, Integer>[] getPalette() {
         return this.palette;
     }
 }

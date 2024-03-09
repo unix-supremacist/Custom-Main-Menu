@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 public class TextResourceLocation implements IText {
 
     String string;
-    ResourceLocation resourceLocation;
+    final ResourceLocation resourceLocation;
 
     public TextResourceLocation(String resourceString) {
         this.resourceLocation = new ResourceLocation(resourceString);
@@ -23,7 +23,7 @@ public class TextResourceLocation implements IText {
         if (this.string == null) {
             return "";
         }
-        if (this.string.equals("")) {
+        if (this.string.isEmpty()) {
             IResource resource = null;
             try {
                 resource = Minecraft.getMinecraft().getResourceManager().getResource(this.resourceLocation);

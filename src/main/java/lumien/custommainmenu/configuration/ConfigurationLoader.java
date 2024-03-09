@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,13 +20,13 @@ import lumien.custommainmenu.gui.GuiCustom;
 
 public class ConfigurationLoader {
 
-    Config config;
+    final Config config;
 
     public ConfigurationLoader(Config config) {
         this.config = config;
     }
 
-    public void load() throws Exception {
+    public void load() {
         JsonReader reader;
         File[] jsonFiles;
         JsonObject jsonObject;
@@ -47,18 +45,14 @@ public class ConfigurationLoader {
             try {
                 output = new FileOutputStream(mainmenuConfig);
                 input = this.getClass().getResourceAsStream("/assets/custommainmenu/mainmenu_default.json");
-                ByteStreams.copy((InputStream) input, (OutputStream) output);
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-                IOUtils.closeQuietly((OutputStream) output);
-                IOUtils.closeQuietly(input);
+                ByteStreams.copy(input, output);
             } catch (IOException e) {
                 e.printStackTrace();
-                IOUtils.closeQuietly((OutputStream) output);
+                IOUtils.closeQuietly(output);
                 IOUtils.closeQuietly(input);
             }
-            IOUtils.closeQuietly((OutputStream) output);
-            IOUtils.closeQuietly((InputStream) input);
+            IOUtils.closeQuietly(output);
+            IOUtils.closeQuietly(input);
         }
         for (File guiFile : jsonFiles = configFolder.listFiles()) {
             if (!guiFile.getName().equals("mainmenu.json")) continue;
@@ -66,7 +60,7 @@ public class ConfigurationLoader {
             name = guiFile.getName().replace(".json", "");
             reader = null;
             try {
-                reader = new JsonReader((Reader) new FileReader(guiFile));
+                reader = new JsonReader(new FileReader(guiFile));
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -90,18 +84,13 @@ public class ConfigurationLoader {
             }
             this.config.addGui(guiConfig.name, new GuiCustom(guiConfig));
         }
-        File[] arr$ = jsonFiles;
-        int len$ = arr$.length;
-        int i$ = 0;
-        while (i$ < len$) {
-            File guiFile;
-            guiFile = arr$[i$];
+        for (File guiFile : jsonFiles) {
             if (!guiFile.getName().equals("mainmenu.json") && guiFile.getName().endsWith(".json")) {
                 guiConfig = new GuiConfig();
                 name = guiFile.getName().replace(".json", "");
                 reader = null;
                 try {
-                    reader = new JsonReader((Reader) new FileReader(guiFile));
+                    reader = new JsonReader(new FileReader(guiFile));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -125,7 +114,6 @@ public class ConfigurationLoader {
                 }
                 this.config.addGui(guiConfig.name, new GuiCustom(guiConfig));
             }
-            ++i$;
         }
     }
 }

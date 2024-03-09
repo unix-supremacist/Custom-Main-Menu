@@ -32,9 +32,7 @@ public class CMMEventHandler {
         try {
             this.guiField = GuiScreenEvent.class.getDeclaredField("gui");
             this.guiField.setAccessible(true);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
+        } catch (NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }
     }
@@ -46,8 +44,7 @@ public class CMMEventHandler {
             if (customMainMenu != null) {
                 event.gui = customMainMenu;
             }
-        } else if (event.gui instanceof GuiCustom) {
-            GuiCustom custom = (GuiCustom) event.gui;
+        } else if (event.gui instanceof GuiCustom custom) {
             GuiCustom target = CustomMainMenu.INSTANCE.config.getGUI(custom.guiConfig.name);
             if (target != custom) {
                 event.gui = target;
@@ -57,16 +54,13 @@ public class CMMEventHandler {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void initGuiPostEarly(GuiScreenEvent.InitGuiEvent.Post event) {
-        if (event.gui instanceof GuiCustom) {
-            GuiCustom custom = (GuiCustom) event.gui;
+        if (event.gui instanceof GuiCustom custom) {
             if (custom.guiConfig.name.equals("mainmenu")) {
-                event.buttonList = new ArrayList();
+                event.buttonList = new ArrayList<>();
                 this.actualGui = custom;
                 try {
-                    this.guiField.set((Object) event, (Object) new GuiFakeMain());
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                    this.guiField.set(event, new GuiFakeMain());
+                } catch (IllegalArgumentException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
@@ -76,22 +70,21 @@ public class CMMEventHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void initGuiPost(GuiScreenEvent.InitGuiEvent.Post event) {
         if (event.gui instanceof GuiFakeMain) {
-            GuiFakeMain fake = (GuiFakeMain) event.gui;
-            HashMap<Integer, GuiButton> removedButtons = new HashMap<Integer, GuiButton>();
-            Iterator iterator = event.buttonList.iterator();
+            HashMap<Integer, GuiButton> removedButtons = new HashMap<>();
+            // noinspection unchecked
+            Iterator<GuiButton> iterator = event.buttonList.iterator();
             while (iterator.hasNext()) {
-                Object o = iterator.next();
-                GuiButton b = (GuiButton) o;
+                GuiButton b = iterator.next();
                 if (b instanceof GuiCustomButton) continue;
                 iterator.remove();
                 removedButtons.put(b.id, b);
-                if (b.id == 666 && Loader.isModLoaded((String) "OpenEye")) {
+                if (b.id == 666 && Loader.isModLoaded("OpenEye")) {
                     CustomMainMenu.INSTANCE.logger.log(
                             Level.DEBUG,
                             "Found OpenEye button, use a wrapped button to config this. (" + b.id + ")");
                     continue;
                 }
-                if (b.id == 404 && Loader.isModLoaded((String) "VersionChecker")) {
+                if (b.id == 404 && Loader.isModLoaded("VersionChecker")) {
                     CustomMainMenu.INSTANCE.logger.log(
                             Level.DEBUG,
                             "Found VersionChecker button, use a wrapped button to config this. (" + b.id + ")");
@@ -102,14 +95,13 @@ public class CMMEventHandler {
                         "Found unsupported button, use a wrapped button to config this. (" + b.id + ")");
             }
             for (GuiButton o : this.actualGui.getButtonList()) {
-                if (!(o instanceof GuiCustomWrappedButton)) continue;
-                GuiCustomWrappedButton b = (GuiCustomWrappedButton) o;
+                if (!(o instanceof GuiCustomWrappedButton b)) continue;
                 CustomMainMenu.INSTANCE.logger.log(
                         Level.DEBUG,
                         "Initiating Wrapped Button " + b.wrappedButtonID
                                 + " with "
                                 + removedButtons.get(b.wrappedButtonID));
-                b.init((GuiButton) removedButtons.get(b.wrappedButtonID));
+                b.init(removedButtons.get(b.wrappedButtonID));
             }
         }
     }

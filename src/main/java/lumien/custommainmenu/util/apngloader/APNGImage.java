@@ -13,24 +13,24 @@ public class APNGImage {
     int filter;
     int textureID;
     int interlace;
-    Triple[] palette;
+    Triple<Integer, Integer, Integer>[] palette;
     Frame[] frames;
     int numberOfFrames;
     int numberOfLoops;
 
     public void draw(int x, int y, int width, int height) {
         Frame currentFrame = this.frames[(int) (System.currentTimeMillis() / 100L % (long) this.frames.length)];
-        GL11.glBindTexture((int) 3553, (int) currentFrame.textureID);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, currentFrame.textureID);
     }
 
-    public void setPalette(Triple[] palette) {
+    public void setPalette(Triple<Integer, Integer, Integer>[] palette) {
         this.palette = palette;
     }
 
     public void bindTexture() {
         GL11.glBindTexture(
-                (int) 3553,
-                (int) this.frames[(int) (System.currentTimeMillis() / 100L % (long) this.frames.length)].textureID);
+                3553,
+                this.frames[(int) (System.currentTimeMillis() / 100L % (long) this.frames.length)].textureID);
     }
 
     public int getBitDepth() {
@@ -93,7 +93,7 @@ public class APNGImage {
         this.interlace = interlace;
     }
 
-    public Triple[] getPalette() {
+    public Triple<Integer, Integer, Integer>[] getPalette() {
         return this.palette;
     }
 

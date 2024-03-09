@@ -7,7 +7,7 @@ import lumien.custommainmenu.lib.textures.ITexture;
 
 public class Background extends Element {
 
-    public ITexture image;
+    public final ITexture image;
     public MODE mode;
     public boolean ichBinEineSlideshow;
     public Slideshow slideShow;
@@ -24,10 +24,10 @@ public class Background extends Element {
         this.mode = MODE.valueOf(newMode.toUpperCase(Locale.US));
     }
 
-    public static enum MODE {
+    public enum MODE {
         FILL,
         STRETCH,
         CENTER,
-        TILE;
+        TILE
     }
 }

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
@@ -31,7 +32,7 @@ public class APNGLoader {
         }
         APNGImage loadedImage = new APNGImage();
         boolean finished = false;
-        ArrayList<Frame> frames = new ArrayList<Frame>();
+        ArrayList<Frame> frames = new ArrayList<>();
         Frame currentFrame = null;
         ByteArrayOutputStream currentImageData = new ByteArrayOutputStream();
         int currentSequenceNumber = -1;
@@ -39,7 +40,7 @@ public class APNGLoader {
             int chunkLength = ByteBuffer.wrap(length).getInt();
             byte[] type = new byte[4];
             inputStream.read(type);
-            String typeString = new String(type, "US-ASCII");
+            String typeString = new String(type, StandardCharsets.US_ASCII);
             System.out.println("Chunk-Type: " + typeString);
             if (typeString.equals("IEND")) break;
             boolean critical = Character.isUpperCase(typeString.charAt(0));
@@ -51,10 +52,8 @@ public class APNGLoader {
             byte[] crc = new byte[4];
             inputStream.read(crc);
             if (typeString.equals("IHDR")) {
-                int width = Ints
-                        .fromBytes((byte) chunkData[0], (byte) chunkData[1], (byte) chunkData[2], (byte) chunkData[3]);
-                int height = Ints
-                        .fromBytes((byte) chunkData[4], (byte) chunkData[5], (byte) chunkData[6], (byte) chunkData[7]);
+                int width = Ints.fromBytes(chunkData[0], chunkData[1], chunkData[2], chunkData[3]);
+                int height = Ints.fromBytes(chunkData[4], chunkData[5], chunkData[6], chunkData[7]);
                 byte bitDepth = chunkData[8];
                 byte colorType = chunkData[9];
                 byte compression = chunkData[10];
@@ -76,13 +75,14 @@ public class APNGLoader {
                 continue;
             }
             if (typeString.equals("PLTE")) {
-                Triple[] palette = new Triple[chunkData.length / 3];
+                // noinspection unchecked
+                Triple<Integer, Integer, Integer>[] palette = new Triple[chunkData.length / 3];
                 boolean index = false;
                 for (int i = 0; i < chunkData.length; i += 3) {
                     int red = chunkData[i] & 0xFF;
                     int green = chunkData[i + 1] & 0xFF;
                     int blue = chunkData[i + 2] & 0xFF;
-                    palette[i / 3] = Triple.of((Object) red, (Object) green, (Object) blue);
+                    palette[i / 3] = Triple.of(red, green, blue);
                 }
                 loadedImage.setPalette(palette);
                 continue;
@@ -93,18 +93,8 @@ public class APNGLoader {
                 continue;
             }
             if (typeString.equals("acTL")) {
-                loadedImage.setNumberOfFrames(
-                        Ints.fromBytes(
-                                (byte) chunkData[0],
-                                (byte) chunkData[1],
-                                (byte) chunkData[2],
-                                (byte) chunkData[3]));
-                loadedImage.setNumberOfLoops(
-                        Ints.fromBytes(
-                                (byte) chunkData[4],
-                                (byte) chunkData[5],
-                                (byte) chunkData[6],
-                                (byte) chunkData[7]));
+                loadedImage.setNumberOfFrames(Ints.fromBytes(chunkData[0], chunkData[1], chunkData[2], chunkData[3]));
+                loadedImage.setNumberOfLoops(Ints.fromBytes(chunkData[4], chunkData[5], chunkData[6], chunkData[7]));
                 System.out.println("Frames : " + loadedImage.numberOfFrames);
                 continue;
             }
@@ -118,34 +108,32 @@ public class APNGLoader {
                 currentFrame = new Frame();
                 ByteArrayInputStream byteStream = new ByteArrayInputStream(chunkData);
                 currentFrame.sequenceNumber = Ints.fromBytes(
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()));
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read());
                 currentFrame.width = Ints.fromBytes(
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()));
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read());
                 currentFrame.height = Ints.fromBytes(
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()));
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read());
                 currentFrame.offX = Ints.fromBytes(
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()));
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read());
                 currentFrame.offY = Ints.fromBytes(
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()),
-                        (byte) ((byte) byteStream.read()));
-                currentFrame.delayNum = Shorts
-                        .fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
-                currentFrame.delayDen = Shorts
-                        .fromBytes((byte) ((byte) byteStream.read()), (byte) ((byte) byteStream.read()));
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read(),
+                        (byte) byteStream.read());
+                currentFrame.delayNum = Shorts.fromBytes((byte) byteStream.read(), (byte) byteStream.read());
+                currentFrame.delayDen = Shorts.fromBytes((byte) byteStream.read(), (byte) byteStream.read());
                 currentFrame.disposeOP = byteStream.read();
                 currentFrame.blendOP = byteStream.read();
                 System.out.println("New Frame: " + currentFrame.sequenceNumber);
@@ -156,10 +144,10 @@ public class APNGLoader {
             if (!typeString.equals("fdAT")) continue;
             ByteArrayInputStream byteStream = new ByteArrayInputStream(chunkData);
             int sequenceNumber = Ints.fromBytes(
-                    (byte) ((byte) byteStream.read()),
-                    (byte) ((byte) byteStream.read()),
-                    (byte) ((byte) byteStream.read()),
-                    (byte) ((byte) byteStream.read()));
+                    (byte) byteStream.read(),
+                    (byte) byteStream.read(),
+                    (byte) byteStream.read(),
+                    (byte) byteStream.read());
             byte[] data = new byte[byteStream.available()];
             byteStream.read(data);
             currentImageData.write(data);
@@ -196,22 +184,21 @@ public class APNGLoader {
         if (pngImage.getColorType() == 6) {
             colorAmount = 4;
         }
-        ByteBuffer byteBuffer = BufferUtils.createByteBuffer(
-                (int) (frame.width * frame.height * colorAmount * pngImage.bitDepth / 8 + frame.height));
+        ByteBuffer byteBuffer = BufferUtils
+                .createByteBuffer(frame.width * frame.height * colorAmount * pngImage.bitDepth / 8 + frame.height);
         Inflater inflater = new Inflater();
         inflater.setInput(imageData);
         byte[][] inflated = new byte[frame.height][frame.width * samples * pngImage.bitDepth / 8 + 1];
         for (int y = 0; y < frame.height; ++y) {
             try {
                 inflater.inflate(inflated[y]);
-                continue;
             } catch (DataFormatException e) {
                 e.printStackTrace();
             }
         }
         for (int line = 0; line < inflated.length; ++line) {
             byte filter = inflated[line][0];
-            block16: for (int t = 1; t < inflated[line].length; ++t) {
+            for (int t = 1; t < inflated[line].length; ++t) {
                 int data = inflated[line][t] & 0xFF;
                 int a = 0;
                 if (t > samples * pngImage.bitDepth / 8) {
@@ -228,24 +215,24 @@ public class APNGLoader {
                 switch (filter) {
                     case 0: {
                         inflated[line][t] = (byte) data;
-                        continue block16;
+                        continue;
                     }
                     case 1: {
                         inflated[line][t] = (byte) (a + data);
-                        continue block16;
+                        continue;
                     }
                     case 2: {
                         inflated[line][t] = (byte) (b + data);
-                        continue block16;
+                        continue;
                     }
                     case 3: {
                         inflated[line][t] = (byte) (data + APNGLoader.getMean(a, b));
-                        continue block16;
+                        continue;
                     }
                     case 4: {
                         int path = APNGLoader.paethPredictor(a, b, c);
                         inflated[line][t] = (byte) (data + path);
-                        continue block16;
+                        continue;
                     }
                     default: {
                         System.out.println(filter);
@@ -262,10 +249,10 @@ public class APNGLoader {
         } else if (pngImage.getColorType() == 3) {
             for (i = 0; i < inflated.length; ++i) {
                 for (int a = 1; a < inflated[i].length; ++a) {
-                    Triple triple = pngImage.palette[inflated[i][a] & 0xFF];
-                    byteBuffer.put(((Integer) triple.getLeft()).byteValue());
-                    byteBuffer.put(((Integer) triple.getMiddle()).byteValue());
-                    byteBuffer.put(((Integer) triple.getRight()).byteValue());
+                    Triple<Integer, Integer, Integer> triple = pngImage.palette[inflated[i][a] & 0xFF];
+                    byteBuffer.put(triple.getLeft().byteValue());
+                    byteBuffer.put(triple.getMiddle().byteValue());
+                    byteBuffer.put(triple.getRight().byteValue());
                 }
             }
         }
@@ -297,33 +284,33 @@ public class APNGLoader {
 
     private static int loadImageData(APNGImage apngImage, Frame frame, byte[] imageData) {
         int textureID = GL11.glGenTextures();
-        GL11.glBindTexture((int) 3553, (int) textureID);
-        GL11.glTexParameteri((int) 3553, (int) 10242, (int) 10497);
-        GL11.glTexParameteri((int) 3553, (int) 10243, (int) 10497);
-        GL11.glTexParameteri((int) 3553, (int) 10240, (int) 9728);
-        GL11.glTexParameteri((int) 3553, (int) 10241, (int) 9728);
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
         if (apngImage.getColorType() == 6) {
             GL11.glTexImage2D(
-                    (int) 3553,
-                    (int) 0,
-                    (int) 6408,
-                    (int) frame.width,
-                    (int) frame.height,
-                    (int) 0,
-                    (int) 6408,
-                    (int) 5121,
-                    (ByteBuffer) APNGLoader.getPixelData(apngImage, frame, imageData));
+                    3553,
+                    0,
+                    6408,
+                    frame.width,
+                    frame.height,
+                    0,
+                    6408,
+                    5121,
+                    APNGLoader.getPixelData(apngImage, frame, imageData));
         } else {
             GL11.glTexImage2D(
-                    (int) 3553,
-                    (int) 0,
-                    (int) 6407,
-                    (int) frame.width,
-                    (int) frame.height,
-                    (int) 0,
-                    (int) 6407,
-                    (int) 5121,
-                    (ByteBuffer) APNGLoader.getPixelData(apngImage, frame, imageData));
+                    3553,
+                    0,
+                    6407,
+                    frame.width,
+                    frame.height,
+                    0,
+                    6407,
+                    5121,
+                    APNGLoader.getPixelData(apngImage, frame, imageData));
         }
         return textureID;
     }
@@ -332,46 +319,46 @@ public class APNGLoader {
         byte[] magic = new byte[8];
         inputStream.read(magic);
         boolean isPNG = true;
-        block10: for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
+        for (int byteIndex = 0; byteIndex < magic.length && isPNG; ++byteIndex) {
             byte b = magic[byteIndex];
             switch (byteIndex) {
                 case 0: {
-                    if (b == -119) continue block10;
+                    if (b == -119) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 1: {
-                    if (b == 80) continue block10;
+                    if (b == 80) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 2: {
-                    if (b == 78) continue block10;
+                    if (b == 78) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 3: {
-                    if (b == 71) continue block10;
+                    if (b == 71) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 4: {
-                    if (b == 13) continue block10;
+                    if (b == 13) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 5: {
-                    if (b == 10) continue block10;
+                    if (b == 10) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 6: {
-                    if (b == 26) continue block10;
+                    if (b == 26) continue;
                     isPNG = false;
-                    continue block10;
+                    continue;
                 }
                 case 7: {
-                    if (b == 10) continue block10;
+                    if (b == 10) continue;
                     isPNG = false;
                 }
             }
