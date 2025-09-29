@@ -1,5 +1,7 @@
 package lumien.custommainmenu.lib.actions;
 
+import java.lang.reflect.Constructor;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiCreateWorld;
@@ -57,7 +59,7 @@ public class ActionOpenGUI implements IAction {
             if (Loader.isModLoaded("angelica")) {
                 try {
                     Class<?> guiShadersClass = Class.forName("net.coderbot.iris.gui.screen.ShaderPackScreen");
-                    java.lang.reflect.Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
+                    Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
                     Object guiInstance = constructor.newInstance(menu.mc.currentScreen);
                     gui = (GuiScreen) guiInstance;
                 } catch (Exception e) {
@@ -66,7 +68,7 @@ public class ActionOpenGUI implements IAction {
             } else if (Loader.isModLoaded("swansong")) {
                 try {
                     Class<?> guiShadersClass = Class.forName("com.ventooth.swansong.gui.GuiShaders");
-                    java.lang.reflect.Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
+                    Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
                     Object guiInstance = constructor.newInstance(menu.mc.currentScreen);
                     gui = (GuiScreen) guiInstance;
                 } catch (Exception e) {
@@ -104,7 +106,7 @@ public class ActionOpenGUI implements IAction {
                     subPages[2] = particlesPage;
                     subPages[3] = otherPage;
                     Class<?> optionPageArrayClass = Class.forName("[L" + OPTION_PAGE_FQN + ";");
-                    java.lang.reflect.Constructor<?> constructor = Class.forName("jss.notfine.gui.GuiCustomMenu")
+                    Constructor<?> constructor = Class.forName("jss.notfine.gui.GuiCustomMenu")
                             .getConstructor(GuiScreen.class, optionPageClass, optionPageArrayClass);
                     Object guiInstance = constructor.newInstance(menu.mc.currentScreen, generalPage, subPages);
                     gui = (GuiScreen) guiInstance;
