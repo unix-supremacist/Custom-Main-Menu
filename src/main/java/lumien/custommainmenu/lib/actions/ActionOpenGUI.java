@@ -19,6 +19,7 @@ import net.minecraft.client.gui.stream.GuiStreamUnavailable;
 import net.minecraft.client.stream.IStream;
 
 import cpw.mods.fml.client.GuiModList;
+import cpw.mods.fml.common.Loader;
 import lumien.custommainmenu.CustomMainMenu;
 import lumien.custommainmenu.gui.GuiCustom;
 
@@ -50,6 +51,30 @@ public class ActionOpenGUI implements IAction {
             gui = new GuiLanguage(menu, menu.mc.gameSettings, menu.mc.getLanguageManager());
         } else if (this.guiName.equalsIgnoreCase("options.ressourcepacks")) {
             gui = new GuiScreenResourcePacks(menu);
+        } else if (this.guiName.equalsIgnoreCase("options.resourcepacks")) {
+            gui = new GuiScreenResourcePacks(menu);
+        } else if (this.guiName.equalsIgnoreCase("options.shaderpacks")) {
+            if (Loader.isModLoaded("angelica")) {
+                try {
+                    Class<?> guiShadersClass = Class.forName("net.coderbot.iris.gui.screen.ShaderPackScreen");
+                    java.lang.reflect.Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
+                    Object guiInstance = constructor.newInstance(menu.mc.currentScreen);
+                    gui = (GuiScreen) guiInstance;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Loader.isModLoaded("swansong")) {
+                try {
+                    Class<?> guiShadersClass = Class.forName("com.ventooth.swansong.gui.GuiShaders");
+                    java.lang.reflect.Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
+                    Object guiInstance = constructor.newInstance(menu.mc.currentScreen);
+                    gui = (GuiScreen) guiInstance;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                gui = new GuiScreenResourcePacks(menu);
+            }
         } else if (this.guiName.equalsIgnoreCase("options.snooper")) {
             gui = new GuiSnooper(menu, menu.mc.gameSettings);
         } else if (this.guiName.equalsIgnoreCase("options.sounds")) {
@@ -63,7 +88,32 @@ public class ActionOpenGUI implements IAction {
                 GuiStreamUnavailable.func_152321_a(menu);
             }
         } else if (this.guiName.equalsIgnoreCase("options.video")) {
-            gui = new GuiVideoSettings(menu, menu.mc.gameSettings);
+            if (Loader.isModLoaded("notfine")) {
+                try {
+                    final String OPTION_PAGE_FQN = "me.jellysquid.mods.sodium.client.gui.options.OptionPage";
+                    Class<?> optionPageClass = Class.forName(OPTION_PAGE_FQN);
+                    Class<?> notFineOptionsClass = Class.forName("jss.notfine.gui.NotFineGameOptionPages");
+                    Object generalPage = notFineOptionsClass.getMethod("general").invoke(null);
+                    Object detailPage = notFineOptionsClass.getMethod("detail").invoke(null);
+                    Object atmospherePage = notFineOptionsClass.getMethod("atmosphere").invoke(null);
+                    Object particlesPage = notFineOptionsClass.getMethod("particles").invoke(null);
+                    Object otherPage = notFineOptionsClass.getMethod("other").invoke(null);
+                    Object[] subPages = (Object[]) java.lang.reflect.Array.newInstance(optionPageClass, 4);
+                    subPages[0] = detailPage;
+                    subPages[1] = atmospherePage;
+                    subPages[2] = particlesPage;
+                    subPages[3] = otherPage;
+                    Class<?> optionPageArrayClass = Class.forName("[L" + OPTION_PAGE_FQN + ";");
+                    java.lang.reflect.Constructor<?> constructor = Class.forName("jss.notfine.gui.GuiCustomMenu")
+                            .getConstructor(GuiScreen.class, optionPageClass, optionPageArrayClass);
+                    Object guiInstance = constructor.newInstance(menu.mc.currentScreen, generalPage, subPages);
+                    gui = (GuiScreen) guiInstance;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                gui = new GuiVideoSettings(menu, menu.mc.gameSettings);
+            }
         } else if (this.guiName.equalsIgnoreCase("options.controls")) {
             gui = new GuiControls(menu, menu.mc.gameSettings);
         } else if (this.guiName.equalsIgnoreCase("options.multiplayer")) {
