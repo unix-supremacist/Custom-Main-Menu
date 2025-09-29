@@ -1,5 +1,6 @@
 package lumien.custommainmenu.lib.actions;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 
 import net.minecraft.client.Minecraft;
@@ -90,7 +91,16 @@ public class ActionOpenGUI implements IAction {
                 GuiStreamUnavailable.func_152321_a(menu);
             }
         } else if (this.guiName.equalsIgnoreCase("options.video")) {
-            if (Loader.isModLoaded("notfine")) {
+            if (Loader.isModLoaded("angelica")) {
+                try {
+                    Class<?> guiShadersClass = Class.forName("me.jellysquid.mods.sodium.client.gui.SodiumOptionsGUI");
+                    Constructor<?> constructor = guiShadersClass.getConstructor(GuiScreen.class);
+                    Object guiInstance = constructor.newInstance(menu.mc.currentScreen);
+                    gui = (GuiScreen) guiInstance;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (Loader.isModLoaded("notfine")) {
                 try {
                     final String OPTION_PAGE_FQN = "me.jellysquid.mods.sodium.client.gui.options.OptionPage";
                     Class<?> optionPageClass = Class.forName(OPTION_PAGE_FQN);
@@ -100,7 +110,7 @@ public class ActionOpenGUI implements IAction {
                     Object atmospherePage = notFineOptionsClass.getMethod("atmosphere").invoke(null);
                     Object particlesPage = notFineOptionsClass.getMethod("particles").invoke(null);
                     Object otherPage = notFineOptionsClass.getMethod("other").invoke(null);
-                    Object[] subPages = (Object[]) java.lang.reflect.Array.newInstance(optionPageClass, 4);
+                    Object[] subPages = (Object[]) Array.newInstance(optionPageClass, 4);
                     subPages[0] = detailPage;
                     subPages[1] = atmospherePage;
                     subPages[2] = particlesPage;
