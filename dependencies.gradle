@@ -1,6 +1,5 @@
 // Add your dependencies here
 
 dependencies {
-    implementation("com.ventooth:swansong-mc1.7.10:1.2.1")
-    compileOnly("com.github.GTNewHorizons:Angelica:1.0.0-beta57:dev")
+
 }
